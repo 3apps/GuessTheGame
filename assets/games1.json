@@ -1,0 +1,120 @@
+{
+	"name" 	: 	"Games",
+	"desc"	: 	"Level 1",
+	"img"	: 	"",
+	"games"	: 	[
+					{
+						"img" 	: "devilmaycry.jpg",
+						"hint"	: "Created by Hideki Kaymiya.",
+						"sound"	: "",
+						"answer": "devil may cry",
+						"close"	: "devil my cry,devilmaycry"	
+					},
+					{
+						"img" 	: "godofwar.jpg",
+						"hint"	: "First released 22nd March 2005.",
+						"sound"	: "",
+						"answer": "god of war",
+						"close" : "godofwar,kratos"
+					},
+					{
+						"img" 	: "kirby.jpg",
+						"hint"	: "He can walk, run, jump, float, slide and inhale, spit out or devour his ememies.",
+						"sound"	: "",
+						"answer": "kirby",
+						"close"	: "kerby, kerbi"
+					},
+					{
+						"img" 	: "pokemon.jpg",
+						"hint"	: "got to catch them all.",
+						"sound"	: "",
+						"answer": "pokemon",
+						"close"	: "pokamon,pokeman"
+					},
+					{
+						"img" 	: "devilmaycry.jpg",
+						"hint"	: "Created by Hideki Kaymiya.",
+						"sound"	: "",
+						"answer": "devil may cry",
+						"close"	: "devil my cry,devilmaycry"	
+					},
+					{
+						"img" 	: "godofwar.jpg",
+						"hint"	: "First released 22nd March 2005.",
+						"sound"	: "",
+						"answer": "god of war",
+						"close" : "godofwar,kratos"
+					},
+					{
+						"img" 	: "kirby.jpg",
+						"hint"	: "He can walk, run, jump, float, slide and inhale, spit out or devour his ememies.",
+						"sound"	: "",
+						"answer": "kirby",
+						"close"	: "kerby, kerbi"
+					},
+					{
+						"img" 	: "pokemon.jpg",
+						"hint"	: "got to catch them all.",
+						"sound"	: "",
+						"answer": "pokemon",
+						"close"	: "pokamon,pokeman"
+					},
+					{
+						"img" 	: "devilmaycry.jpg",
+						"hint"	: "Created by Hideki Kaymiya.",
+						"sound"	: "",
+						"answer": "devil may cry",
+						"close"	: "devil my cry,devilmaycry"	
+					},
+					{
+						"img" 	: "godofwar.jpg",
+						"hint"	: "First released 22nd March 2005.",
+						"sound"	: "",
+						"answer": "god of war",
+						"close" : "godofwar,kratos"
+					},
+					{
+						"img" 	: "kirby.jpg",
+						"hint"	: "He can walk, run, jump, float, slide and inhale, spit out or devour his ememies.",
+						"sound"	: "",
+						"answer": "kirby",
+						"close"	: "kerby, kerbi"
+					},
+					{
+						"img" 	: "pokemon.jpg",
+						"hint"	: "got to catch them all.",
+						"sound"	: "",
+						"answer": "pokemon",
+						"close"	: "pokamon,pokeman"
+					},
+					{
+						"img" 	: "devilmaycry.jpg",
+						"hint"	: "Created by Hideki Kaymiya.",
+						"sound"	: "",
+						"answer": "devil may cry",
+						"close"	: "devil my cry,devilmaycry"	
+					},
+					{
+						"img" 	: "godofwar.jpg",
+						"hint"	: "First released 22nd March 2005.",
+						"sound"	: "",
+						"answer": "god of war",
+						"close" : "godofwar,kratos"
+					},
+					{
+						"img" 	: "kirby.jpg",
+						"hint"	: "He can walk, run, jump, float, slide and inhale, spit out or devour his ememies.",
+						"sound"	: "",
+						"answer": "kirby",
+						"close"	: "kerby, kerbi"
+					},
+					{
+						"img" 	: "pokemon.jpg",
+						"hint"	: "got to catch them all.",
+						"sound"	: "",
+						"answer": "pokemon",
+						"close"	: "pokamon,pokeman"
+					}
+				]
+
+}
