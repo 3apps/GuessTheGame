@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -20,16 +21,31 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
 public class MainActivity extends Activity {
-
+	
+	public static final String PREFS_NAME = "GTGPrefs";
+	
+	static SharedPreferences prefs;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-				
+		
+		prefs = getSharedPreferences(PREFS_NAME, 0);
+		
+		//REMOVE WHEN LIVE AS THIS RESETS SAVED DATA WHEN APP IS RE OPEND
+		SharedPreferences.Editor editor = MainActivity.prefs.edit();
+		editor.clear();
+		editor.commit();
+		
+		Toast.makeText(this, "SAVED GAME RESET DUE TO DEVELOPMENT", Toast.LENGTH_LONG).show();
+		/////////////////////////////////////////////////////////////////
+		
 		final LevelListAdaptor adaptor = new LevelListAdaptor(this,R.layout.row, loadList());
 			
 		final ListView listViewLevels = (ListView) findViewById(R.id.levels);

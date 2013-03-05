@@ -38,7 +38,7 @@
 	    android:id="@+id/games"
 	    android:layout_width="fill_parent"
 	    android:layout_height="fill_parent"
-	    android:columnWidth="90dp"
+	    android:columnWidth="92dp"
 	    android:numColumns="3"
 
 	    android:stretchMode="columnWidth"

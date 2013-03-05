@@ -10,6 +10,7 @@ import android.content.Context;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
@@ -29,6 +30,7 @@ class GameListAdaptor extends ArrayAdapter<Games> {
     private final Context context;
     public static int addHeight;
     public ImageView ii;
+    static int correct;	
     
     public GameListAdaptor(Context context, int textViewResourceId, ArrayList<Games> items) {
          super(context, textViewResourceId, items);
@@ -50,7 +52,11 @@ class GameListAdaptor extends ArrayAdapter<Games> {
         Games o = games.get(position);
 		
         ii = (ImageView) v.findViewById(R.id.game);
-
+        
+        correct = MainActivity.prefs.getInt(o.img, 0);
+        
+        if(correct == 1) ii.setBackgroundColor(Color.GREEN);
+        
         try {
 			ii.setImageBitmap(MainActivity.getBitmap(context, "images/" + o.img));
 		} catch (IOException e) {

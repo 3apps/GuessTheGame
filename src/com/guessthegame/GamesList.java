@@ -112,6 +112,14 @@ public class GamesList extends Activity {
 		return super.onOptionsItemSelected(item);
 	}
 	
+	@Override
+	public void onResume() { 
+		// After a pause OR at startup
+		super.onResume();
+		adaptor.notifyDataSetChanged();
+		//Refresh your stuff here
+	}
+	
 	private ArrayList<Games> loadGames(){
         ArrayList<Games> games = new ArrayList<Games>();
         		
