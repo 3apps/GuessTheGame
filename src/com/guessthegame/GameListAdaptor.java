@@ -52,7 +52,7 @@ class GameListAdaptor extends ArrayAdapter<Games> {
         ii = (ImageView) v.findViewById(R.id.game);
 
         try {
-			ii.setImageBitmap(getBitmap("images/" + o.img));
+			ii.setImageBitmap(MainActivity.getBitmap(context, "images/" + o.img));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -60,16 +60,5 @@ class GameListAdaptor extends ArrayAdapter<Games> {
         
         return v;
     }
-    
-    private Bitmap getBitmap(String name) throws IOException {
-        AssetManager asset = context.getAssets();
-
-        InputStream is = asset.open(name);
-        Bitmap bitmap = BitmapFactory.decodeStream(is);
-
-        is.close();
         
-        return bitmap;
-    }
-    
 }

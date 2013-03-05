@@ -1,0 +1,34 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Game"
+    android:layout_gravity="center_horizontal">"
+
+    <ImageView
+		android:id="@+id/game"
+		android:layout_width="200dp"
+        android:layout_height="200dp"
+		android:src="@drawable/ic_game" 
+		android:layout_gravity="center_horizontal"
+		android:background="#FFFFFF"
+		android:padding="5dp"
+		/>
+    
+    <EditText 
+        android:id="@+id/answer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+    
+    <TextView
+        android:id="@+id/hint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:text="" />
+    
+    
+
+</LinearLayout>

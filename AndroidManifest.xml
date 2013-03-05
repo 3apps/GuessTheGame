@@ -24,7 +24,19 @@
         </activity>
         <activity
             android:name="com.guessthegame.GamesList"
-            android:label="@string/title_activity_games_list" >
+            android:label="@string/title_activity_games_list" 
+            android:parentActivityName="com.guessthegame.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.guessthegame.MainActivity" />
+        </activity>
+        <activity
+            android:name="com.guessthegame.Game"
+            android:label="@string/title_activity_game"
+            android:parentActivityName="com.guessthegame.GamesList" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.guessthegame.GamesList" />
         </activity>
     </application>
 

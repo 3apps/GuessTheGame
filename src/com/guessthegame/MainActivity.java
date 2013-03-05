@@ -11,8 +11,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.AssetManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -118,5 +121,16 @@ public class MainActivity extends Activity {
 		return levels;
 		
 	}
+	
+	public static Bitmap getBitmap(Context context, String name) throws IOException {
+        AssetManager asset = context.getAssets();
+
+        InputStream is = asset.open(name);
+        Bitmap bitmap = BitmapFactory.decodeStream(is);
+
+        is.close();
+        
+        return bitmap;
+    }
 	
 }

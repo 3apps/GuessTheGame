@@ -34,13 +34,18 @@
         
     </LinearLayout>
     
-    <ListView
-		android:id="@+id/games"
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content"
-		android:divider="#4F4F4F"
-	   	android:dividerHeight="1dip"
-	   	android:layout_below="@+id/header"
-	   	/>
+    <GridView
+	    android:id="@+id/games"
+	    android:layout_width="fill_parent"
+	    android:layout_height="fill_parent"
+	    android:columnWidth="90dp"
+	    android:numColumns="3"
 
+	    android:stretchMode="columnWidth"
+	    android:gravity="center_vertical|center_horizontal"
+	    android:layout_below="@+id/header"
+	    
+	    android:padding="30dp"
+	    />
+    
 </RelativeLayout>
