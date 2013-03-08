@@ -2,12 +2,12 @@ package com.guessthegame;
 
 import java.io.IOException;
 import java.io.InputStream;
+
 import android.content.Context;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
-import android.view.View;
 import android.widget.ImageView;
 
 class loadImage extends AsyncTask<Object, Void, Bitmap> {
@@ -48,10 +48,9 @@ class loadImage extends AsyncTask<Object, Void, Bitmap> {
 	protected void onPostExecute(Bitmap result) {
 
 		if (result != null && imv != null) {
-			imv.setVisibility(View.VISIBLE);
 			imv.setImageBitmap(result);
 		} else {
-			imv.setVisibility(View.GONE);
+			imv.setImageBitmap(null);
 		}
 	}
 

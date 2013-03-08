@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	android:layout_height="wrap_content"
-	android:gravity="left|center"
-	android:layout_width="wrap_content" 
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_height="fill_parent"
+	android:gravity="center_horizontal|center_vertical"
+	android:layout_width="fill_parent"
 	android:paddingBottom="10dp"
 	android:paddingTop="10dp" 
 	android:paddingLeft="10dp"
@@ -16,5 +16,24 @@
 		android:background="#FFFFFF"
 		android:padding="1dp"
 		/>
-
-</LinearLayout>
+	<!-- 
+		<RelativeLayout
+	    android:layout_width="fill_parent"
+	    android:layout_height="fill_parent"
+	    android:background="#000000"
+	    android:visibility="visible"
+	    >
+	    
+	    <ImageView
+	        android:id="@+id/tick"
+	        android:layout_width="20dp"
+	        android:layout_height="20dp"
+	        android:background="#FFFFFF"
+	        android:layout_centerHorizontal="true"
+	        android:layout_centerVertical="true"
+	        android:layout_centerInParent="true"
+	        />
+	    
+	</RelativeLayout>
+		 -->
+</RelativeLayout>

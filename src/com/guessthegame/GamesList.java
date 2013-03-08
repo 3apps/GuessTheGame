@@ -39,7 +39,7 @@ public class GamesList extends Activity {
 		setContentView(R.layout.activity_games_list);
 		
 		// Show the Up button in the action bar.
-		getActionBar().setDisplayHomeAsUpEnabled(true);
+		//getActionBar().setDisplayHomeAsUpEnabled(true);
 		
 		Bundle extras = getIntent().getExtras();
 		

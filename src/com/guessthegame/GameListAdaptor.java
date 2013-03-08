@@ -1,28 +1,15 @@
 package com.guessthegame;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 import android.content.Context;
-import android.content.res.AssetManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.View.MeasureSpec;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.ListAdapter;
-import android.widget.ListView;
-import android.widget.TextView;
 
 class GameListAdaptor extends ArrayAdapter<Games> {
 	
@@ -53,10 +40,17 @@ class GameListAdaptor extends ArrayAdapter<Games> {
 		
         ii = (ImageView) v.findViewById(R.id.game);
         
+        ii.setVisibility(View.VISIBLE);
+        
         correct = MainActivity.prefs.getInt(o.img, 0);
         
-        if(correct == 1) ii.setBackgroundColor(Color.GREEN);
+        Log.i("correct",o.img + " - " + correct);
         
+        if(correct > 0) {
+        	ii.setBackgroundColor(Color.GREEN);
+        } else {
+        	ii.setBackgroundColor(Color.TRANSPARENT);
+        }
         
         new loadImage(context, ii, "images/" + o.img).execute();
         
