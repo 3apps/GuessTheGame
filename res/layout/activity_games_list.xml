@@ -31,6 +31,15 @@
 	     	android:textColor="#6E6E6E"
 	     	android:layout_marginLeft="15dp"
 	     	android:gravity="center_vertical|center_horizontal"/>
+		
+		<TextView android:id="@+id/count" 
+	    	android:layout_width="wrap_content" 
+	     	android:layout_height="wrap_content" 
+	     	android:textSize="18dp"
+	     	android:textColor="#6E6E6E"
+	     	android:layout_marginLeft="15dp"
+	     	android:gravity="center_vertical|center_horizontal"
+	     	/>
         
     </LinearLayout>
     

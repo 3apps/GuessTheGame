@@ -3,6 +3,7 @@ package com.guessthegame;
 import java.io.IOException;
 import java.util.HashMap;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Context;
@@ -30,7 +31,7 @@ public class Game extends Activity {
 	static ImageView gImg;
 	static TextView gHint;
 	static EditText gAnswer;
-	static String close, answer, sound, hint, img = "";
+	static String close, answer, sound, hint, img, file = "";
 	static int correct;	
 		
 	@Override
@@ -40,15 +41,19 @@ public class Game extends Activity {
 		// Show the Up button in the action bar.
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 		
-		
+
 		Bundle extras = getIntent().getExtras();
 		
 		if(extras != null) {
+			file 	= extras.getString("FILE");
 			img 	= extras.getString("IMG");
 			hint	= extras.getString("HINT");
 			sound	= extras.getString("SOUND");
 			answer	= extras.getString("ANSWER");
 			close	= extras.getString("CLOSE");
+			
+			Log.i("FILE",""+file);
+			
 		}
 		
 		if(img != "") {
@@ -81,17 +86,23 @@ public class Game extends Activity {
 			
 			gHint.setText(hint);
 			
-			try {
-				gImg.setImageBitmap(MainActivity.getBitmap(this, "images/" + img));
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
+			new loadImage(this, gImg, "images/" + img).execute();
+
+		}
+	
+		
+	}
+	
+	private class DownloadImageTask extends AsyncTask<String, Void, String> {
+
+		@Override
+		protected String doInBackground(String... arg0) {
+			// TODO Auto-generated method stub
+			return null;
 		}
 		
 	}
-
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -111,23 +122,33 @@ public class Game extends Activity {
 	
 	public void checkAnswer(String text) {
 		
-		SharedPreferences.Editor editor = MainActivity.prefs.edit();
+		if(correct == 0) {
 		
-		if(text.toLowerCase().equals(answer)) {
+			SharedPreferences.Editor editor = MainActivity.prefs.edit();
 			
-			editor.putInt(img, 1);
-			editor.commit();
-			
-			Toast.makeText(Game.this, "CORRECT!", Toast.LENGTH_LONG).show();
-			gImg.setBackgroundColor(Color.GREEN);
-			
-		} else if(close.toLowerCase().contains(text)) {
-			
-			Toast.makeText(Game.this, "Soo close, try again!", Toast.LENGTH_LONG).show();
-			
-		} else {
-			Toast.makeText(Game.this, "Wrong, try again!", Toast.LENGTH_LONG).show();
-			gAnswer.setText("");
+			if(text.toLowerCase().equals(answer)) {
+				
+				int correctCnt = MainActivity.prefs.getInt(file+"_correct_cnt", 0);
+				
+				int currentCorrect = (correctCnt+1);
+								
+				editor.putInt(file+"_correct_cnt", currentCorrect);
+				editor.putInt(img, 1);
+				editor.commit();
+				
+				Log.i("correct_cnt","" + MainActivity.prefs.getInt(file+"_correct_cnt", 0));
+				
+				Toast.makeText(Game.this, "CORRECT!", Toast.LENGTH_LONG).show();
+				gImg.setBackgroundColor(Color.GREEN);
+				
+			} else if(close.toLowerCase().contains(text)) {
+				
+				Toast.makeText(Game.this, "Soo close, try again!", Toast.LENGTH_LONG).show();
+				
+			} else {
+				Toast.makeText(Game.this, "Wrong, try again!", Toast.LENGTH_LONG).show();
+				gAnswer.setText("");
+			}
 		}
 		
 	}

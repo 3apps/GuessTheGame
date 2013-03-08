@@ -1,17 +1,17 @@
 package com.guessthegame;
 
+import java.io.IOException;
+import java.text.NumberFormat;
 import java.util.ArrayList;
-
 import android.content.Context;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.View.MeasureSpec;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.ListAdapter;
-import android.widget.ListView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 class LevelListAdaptor extends ArrayAdapter<Levels> {
@@ -37,17 +37,54 @@ class LevelListAdaptor extends ArrayAdapter<Levels> {
             v = inflater.inflate(R.layout.row, null);
         }
         
+        //Current list position
         Levels o = levels.get(position);
         
-        ImageView ii = (ImageView) v.findViewById(R.id.img);
-        TextView tt = (TextView) v.findViewById(R.id.name);
-        TextView bt = (TextView) v.findViewById(R.id.desc);
+        Log.i("img","" + o.img);
         
-        tt.setText(o.name);
-        bt.setText(o.desc);
-
-        //ii.setImageResource(o.img);
+        //List row elements - res->layout-> row.xml
+        LinearLayout 	rr = (LinearLayout) v.findViewById(R.id.rowInner);
+        ImageView 		ii = (ImageView) v.findViewById(R.id.img);
+        TextView 		nn = (TextView) v.findViewById(R.id.name);
+        TextView 		dd = (TextView) v.findViewById(R.id.desc);
+        TextView 		pp = (TextView) v.findViewById(R.id.percent);
         
+        //Clear Image
+        ii.setImageDrawable(null);
+        rr.setBackgroundColor(Color.TRANSPARENT);
+        
+        //Shared preferences for number of games in the level and number of correct answers for the level
+        int noGames 	= ((int) MainActivity.prefs.getInt(o.file+"_cnt", 0));
+        int correctCnt 	= ((int) MainActivity.prefs.getInt(o.file+"_correct_cnt", 0));
+        
+        //Level name
+        nn.setText(o.name);
+        
+        //Level description
+        dd.setText(o.desc);
+        
+        //Work out the percentage correct for the level. MUST BE DOUBLE
+        double percent = ((double) correctCnt/noGames)*100;
+        
+        //Percentage
+        pp.setText(""+NumberFormat.getInstance().format(percent)+"%");
+        
+      //If level is 100% complete style row
+        if(percent == 100) {
+        	rr.setBackgroundColor(Color.GREEN);
+        }
+                
+        //If level has an image
+        if(o.img != null && o.img != "" && o.img.length() > 0) {
+	        try {
+				ii.setImageBitmap(MainActivity.getBitmap(context, "images/" + o.img));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+        } else {
+        	ii.setBackgroundResource(R.drawable.ic_game);
+        }
         return v;
     }
     

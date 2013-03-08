@@ -57,12 +57,8 @@ class GameListAdaptor extends ArrayAdapter<Games> {
         
         if(correct == 1) ii.setBackgroundColor(Color.GREEN);
         
-        try {
-			ii.setImageBitmap(MainActivity.getBitmap(context, "images/" + o.img));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+        
+        new loadImage(context, ii, "images/" + o.img).execute();
         
         return v;
     }
