@@ -1,7 +1,8 @@
 {
-	"name" 	: 	"Games",
-	"desc"	: 	"Level 1",
+	"name" 	: 	"Level 1",
+	"desc"	: 	"Beginners pack. Lets get started!",
 	"img"	: 	"",
+	"paid"	:	"no",
 	"games"	: 	[
 					{
 						"img" 	: "devilmaycry.jpg",

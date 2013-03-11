@@ -1,8 +1,8 @@
 {
-	"name" 	: 	"Level 2",
-	"desc"	: 	"Getting a bit harder. test test",
-	"img"	: 	"",
-	"paid"	:	"no",
+	"name" 	: 	"Nintendo pack",
+	"desc"	: 	"All the best games",
+	"img"	: 	"pokemon.jpg",
+	"paid"	:	"yes",
 	"games"	: 	[
 					{
 						"img" 	: "devilmaycry.jpg",

@@ -111,15 +111,18 @@ public class MainActivity extends Activity {
    					
    					Levels level = adaptor.getItem(position);
    					
-   					Intent intent = new Intent(getBaseContext(), GamesList.class);
+   					if(level.paid.toString().contains("no")) {
    					
-   					intent.putExtra("FILE", level.file);
-   					intent.putExtra("NAME", level.name);
-   					intent.putExtra("DESC", level.desc);
-   					intent.putExtra("IMG", level.img);
-   					
-   					startActivity(intent);
-   					
+	   					Intent intent = new Intent(getBaseContext(), GamesList.class);
+	   					
+	   					intent.putExtra("FILE", level.file);
+	   					intent.putExtra("NAME", level.name);
+	   					intent.putExtra("DESC", level.desc);
+	   					intent.putExtra("IMG", level.img);
+	   					
+	   					startActivity(intent);
+	   					
+   					}
    				}
    				
    			});
@@ -165,7 +168,8 @@ public class MainActivity extends Activity {
                     level.name 	= jsonObj.getString("name");
                     level.desc 	= jsonObj.getString("desc");
                     level.img	= jsonObj.getString("img");
-
+                    level.paid	= jsonObj.getString("paid");
+                    
                     levels.add(level);
                     
                     final JSONArray gamesArr = jsonObj.getJSONArray("games");

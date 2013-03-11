@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 class LevelListAdaptor extends ArrayAdapter<Levels> {
@@ -48,10 +49,18 @@ class LevelListAdaptor extends ArrayAdapter<Levels> {
         TextView 		nn = (TextView) v.findViewById(R.id.name);
         TextView 		dd = (TextView) v.findViewById(R.id.desc);
         TextView 		pp = (TextView) v.findViewById(R.id.percent);
+        RelativeLayout 	aa = (RelativeLayout) v.findViewById(R.id.actions);
         
         //Clear Image
         ii.setImageDrawable(null);
-        rr.setBackgroundColor(Color.TRANSPARENT);
+        ii.setImageDrawable(null);
+        
+        if(o.paid.toString().contains("no")) {
+        	aa.setBackgroundResource(R.drawable.start);
+        	Log.i("paid","" + o.paid);
+        } else {
+        	aa.setBackgroundResource(R.drawable.locked);
+        }
         
         //Shared preferences for number of games in the level and number of correct answers for the level
         int noGames 	= ((int) MainActivity.prefs.getInt(o.file+"_cnt", 0));
@@ -66,12 +75,10 @@ class LevelListAdaptor extends ArrayAdapter<Levels> {
         //Work out the percentage correct for the level. MUST BE DOUBLE
         double percent = ((double) correctCnt/noGames)*100;
         
-        //Percentage
-        pp.setText(""+NumberFormat.getInstance().format(percent)+"%");
-        
-      //If level is 100% complete style row
+        //If level is 100% complete style row
         if(percent == 100) {
-        	rr.setBackgroundColor(Color.GREEN);
+        	aa.setBackgroundResource(R.drawable.tick);
+        	dd.setText("Completed");
         }
                 
         //If level has an image

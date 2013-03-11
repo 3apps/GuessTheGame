@@ -5,4 +5,5 @@ public class Levels {
     String name;
     String desc;
     String file;
+    String paid;
 }
