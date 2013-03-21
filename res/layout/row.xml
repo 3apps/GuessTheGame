@@ -3,58 +3,51 @@
     android:id="@+id/row"
 	android:layout_height="50dp"
 	android:layout_width="fill_parent"
-	android:background="@drawable/borders"
 	android:orientation="horizontal"
 	android:gravity="center_vertical"
 	>
-  
-    <LinearLayout
-        android:id="@+id/rowInner"
-        android:layout_height="fill_parent"
-        android:layout_width="fill_parent"
-        android:layout_margin="1dp"
-        >
+
+	<RelativeLayout 
+		android:layout_width="fill_parent"
+		android:layout_weight="1"
+		android:layout_height="fill_parent"
+		android:orientation="horizontal"
+		android:gravity="center_vertical"
+		android:background="@drawable/borders"
+		android:padding="10dp"
+		android:layout_marginLeft="12dp"
+		android:layout_marginRight="12dp"
+		>
 		
-		<RelativeLayout 
-			android:layout_width="0dip"
-			android:layout_weight="1"
-			android:layout_height="fill_parent"
-			android:orientation="horizontal"
-			android:gravity="center_vertical"
-			android:padding="10dp"
-			>
-			
-		    <ImageView
-				android:id="@+id/img"
-				android:layout_width="50dp"
-		        android:layout_height="50dp"
-				android:src="@drawable/ic_game"
-				/>
-		    		
-			<TextView android:id="@+id/name"
-		    	android:layout_width="wrap_content"
-		    	android:layout_height="wrap_content"
-		    	android:textColor="#6E6E6E"
-		    	android:textSize="20dp"
-		    	android:textStyle="bold"
-		    	android:gravity="center_vertical|center_horizontal"
-		    	android:layout_toLeftOf="@+id/ic_game"
-		    	android:layout_marginLeft="65dp"
-		    	android:textAllCaps="true"/>"
-			
-			<TextView android:id="@+id/desc" 
-		    	android:layout_width="wrap_content" 
-		     	android:layout_height="wrap_content" 
-		     	android:textSize="12dp"
-		     	android:textColor="#6E6E6E"
-		     	android:gravity="center_vertical|center_horizontal"
-		     	android:layout_below="@+id/name"
-		     	android:layout_marginLeft="65dp"/>
-			
-		</RelativeLayout>
+	    <ImageView
+			android:id="@+id/img"
+			android:layout_width="50dp"
+	        android:layout_height="50dp"
+			android:src="@drawable/ic_game"
+			/>
+	    		
+		<TextView android:id="@+id/name"
+	    	android:layout_width="wrap_content"
+	    	android:layout_height="wrap_content"
+	    	android:textColor="#6E6E6E"
+	    	android:textSize="20dp"
+	    	android:textStyle="bold"
+	    	android:gravity="center_vertical|center_horizontal"
+	    	android:layout_toLeftOf="@+id/ic_game"
+	    	android:layout_marginLeft="65dp"
+	    	android:textAllCaps="true"/>"
 		
-	</LinearLayout>
-	
+		<TextView android:id="@+id/desc" 
+	    	android:layout_width="wrap_content" 
+	     	android:layout_height="wrap_content" 
+	     	android:textSize="12dp"
+	     	android:textColor="#6E6E6E"
+	     	android:gravity="center_vertical|center_horizontal"
+	     	android:layout_below="@+id/name"
+	     	android:layout_marginLeft="65dp"/>
+		
+	</RelativeLayout>
+		
     <RelativeLayout
 	    android:id="@+id/actions"
 	    android:layout_width="63dp"
@@ -63,18 +56,8 @@
 	    android:layout_centerVertical="true"
 	    android:gravity="center_vertical|center_horizontal"
 	    android:background="@drawable/locked"
-	    android:layout_marginRight="-2dp"
-	    >
-		
-		<TextView android:id="@+id/percent" 
-	    	android:layout_width="wrap_content" 
-	     	android:layout_height="wrap_content" 
-	     	android:textSize="30dp"
-	     	android:textColor="#FF0000"
-	     	android:layout_alignParentRight="true"
-	     	android:gravity="center_vertical|center_horizontal"
-	     	android:visibility="invisible" />
-						
-	</RelativeLayout>
+	    android:layout_marginRight="8dp"
+	    android:layout_marginTop="5dp"
+	   	/>
 	
 </RelativeLayout>

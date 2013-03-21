@@ -44,11 +44,9 @@ class LevelListAdaptor extends ArrayAdapter<Levels> {
         Log.i("img","" + o.img);
         
         //List row elements - res->layout-> row.xml
-        LinearLayout 	rr = (LinearLayout) v.findViewById(R.id.rowInner);
         ImageView 		ii = (ImageView) v.findViewById(R.id.img);
         TextView 		nn = (TextView) v.findViewById(R.id.name);
         TextView 		dd = (TextView) v.findViewById(R.id.desc);
-        TextView 		pp = (TextView) v.findViewById(R.id.percent);
         RelativeLayout 	aa = (RelativeLayout) v.findViewById(R.id.actions);
         
         //Clear Image

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	android:layout_width="80dp"
-	android:layout_height="80dp"
+	android:layout_width="90dip"
+	android:layout_height="90dip"
 	android:gravity="center_horizontal|center_vertical"
 	android:paddingBottom="10dp"
 	android:paddingTop="10dp" 
@@ -10,16 +10,16 @@
 	>
   	
     <RelativeLayout
-        android:layout_width="80dp"
-	    android:layout_height="80dp"
+        android:layout_width="90dip"
+	    android:layout_height="90dip"
         android:background="@drawable/borders"
         android:padding="5dp"
         >
         
 		<ImageView
 			android:id="@+id/game"
-			android:layout_width="80dp"
-	        android:layout_height="80dp"
+			android:layout_width="90dip"
+	        android:layout_height="90dip"
 			android:src="@drawable/ic_game" 
 			android:padding="1dp"
 			/>
@@ -33,7 +33,7 @@
 	    android:layout_centerVertical="true"
 	    android:gravity="right"
 	    android:background="@drawable/complete"
-	    android:layout_marginLeft="30dp"
+	    android:layout_marginLeft="40dp"
 	    android:visibility="invisible"
 	    >
 			

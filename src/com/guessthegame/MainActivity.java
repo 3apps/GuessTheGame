@@ -6,8 +6,11 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.lang.ref.WeakReference;
 import java.net.URL;
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.concurrent.TimeUnit;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -34,6 +37,7 @@ import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
@@ -50,24 +54,25 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		
-		getActionBar().hide();
-		
+				
 		prefs = getSharedPreferences(PREFS_NAME, 0);
 		editor = MainActivity.prefs.edit();
 		
 		LinearLayout header = (LinearLayout) findViewById(R.id.header);
 		
-		header.setOnClickListener(new OnClickListener(){
+		header.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				if(getActionBar().isShowing() == true) {
-					getActionBar().hide();
-				} else {
-					getActionBar().show();
-				}
+				//REMOVE WHEN LIVE AS THIS RESETS SAVED DATA WHEN APP IS RE OPEND - APP WILL BE SLOW TO OPEN DUE TO DELETING ALL PREFS
+				editor.clear();
+				editor.commit();
+				
+				new LoadJsonTask().execute();
+				
+				Toast.makeText(getBaseContext(), "SAVED DATA DELETED", Toast.LENGTH_LONG).show();
+				/////////////////////////////////////////////////////////////////
 			}
 			
 		});
@@ -78,8 +83,25 @@ public class MainActivity extends Activity {
 	public void onResume() { 
 		// After a pause OR at startup
 		super.onResume();
-
+		
+		TextView timeText =  (TextView) findViewById(R.id.time);
+		
+		timeText.setText(MainActivity.getTime());
+		
 		new LoadJsonTask().execute();
+			
+	}
+	
+	public static String getTime() {
+		
+		long totalTime = MainActivity.prefs.getLong("totalTime", 0);
+		
+		long seconds = (long) (totalTime / 1000) % 60 ;
+		long minutes = (long) ((totalTime / (1000*60)) % 60);
+		long hours   = (long) ((totalTime / (1000*60*60)) % 24);
+		
+		return String.format("%02d:%02d:%02d",(int) hours,(int) minutes,(int) seconds);
+		
 	}
 	
 	@Override

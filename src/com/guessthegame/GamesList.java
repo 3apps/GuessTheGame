@@ -1,27 +1,27 @@
 	package com.guessthegame;
 	
 	import java.io.IOException;
-	import java.io.InputStream;
-	import java.util.ArrayList;
+import java.io.InputStream;
+import java.util.ArrayList;
 	
 	import org.json.JSONArray;
-	import org.json.JSONException;
-	import org.json.JSONObject;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 	import com.viewpagerindicator.LinePageIndicator;
-	import android.os.Bundle;
-	import android.os.Parcelable;
-	import android.app.Activity;
-	import android.support.v4.app.NavUtils;
-	import android.support.v4.view.PagerAdapter;
-	import android.support.v4.view.ViewPager;
-	import android.util.Log;
-	import android.view.LayoutInflater;
-	import android.view.Menu;
-	import android.view.MenuItem;
-	import android.view.View;
-	import android.widget.GridView;
-	import android.widget.TextView;
+import android.os.Bundle;
+import android.os.Parcelable;
+import android.app.Activity;
+import android.support.v4.app.NavUtils;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.GridView;
+import android.widget.TextView;
 	
 	public class GamesList extends Activity {
 	
@@ -86,15 +86,17 @@
 		protected void onCreate(Bundle savedInstanceState) {
 			super.onCreate(savedInstanceState);
 			setContentView(R.layout.activity_games_page);
-			
-			getActionBar().hide();
-
+	
 		}
 		
 		@Override
 		public void onResume() { 
 			// After a pause OR at startup
 			super.onResume();
+			
+			TextView timeText =  (TextView) findViewById(R.id.time);
+			
+			timeText.setText(MainActivity.getTime());
 			
 			Bundle extras = getIntent().getExtras();
 			

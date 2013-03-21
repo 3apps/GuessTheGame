@@ -26,15 +26,16 @@ public class Game extends Activity {
 	static EditText gAnswer;
 	static String close, answer, sound, hint, img, file = "";
 	static int correct;	
-		
+	long startTime;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_game);
 		// Show the Up button in the action bar.
-		getActionBar().hide();
 		
-
+		startTime = System.currentTimeMillis();
+		
 		Bundle extras = getIntent().getExtras();
 		
 		if(extras != null) {
@@ -126,17 +127,18 @@ public class Game extends Activity {
 			
 			if(text.toLowerCase().equals(answer)) {
 				
+				long difference = System.currentTimeMillis() - startTime;
+				
 				int correctCnt = MainActivity.prefs.getInt(file+"_correct_cnt", 0);
 				
+				long totalTime = MainActivity.prefs.getLong("totalTime", 0);
+				
 				int currentCorrect = (correctCnt+1);
-								
+				
+				editor.putLong("totalTime", totalTime+difference);
 				editor.putInt(file+"_correct_cnt", currentCorrect);
 				editor.putInt(img, 1);
 				editor.commit();
-				
-				Log.i("correct_cnt","" + MainActivity.prefs.getInt(file+"_correct_cnt", 0));
-				
-				Toast.makeText(Game.this, "CORRECT!", Toast.LENGTH_LONG).show();
 
 				actions.setVisibility(View.VISIBLE);
 				

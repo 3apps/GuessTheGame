@@ -54,7 +54,7 @@
 	            android:id="@+id/time" 
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
-	            android:text="00:01:29"
+	            android:text=""
 	            android:layout_below="@+id/username"
 	            android:textSize="36dp"
 	            android:textColor="#b6d74d"
@@ -72,12 +72,15 @@
 		android:id="@+id/levels"
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content"
-		android:paddingLeft="12dp"
-		android:paddingRight="12dp"
+		android:paddingLeft="0dp"
+		android:paddingRight="0dp"
 	   	android:layout_below="@+id/header"
 	   	android:divider="@android:color/transparent"
 	   	android:dividerHeight="12dp"
 	   	android:paddingTop="12dp"
+	   	android:paddingBottom="12dp"
+	   	android:listSelector="@android:color/transparent"
+	   	android:fadingEdgeLength="0dp"
 	   	/>
     
 </RelativeLayout>
