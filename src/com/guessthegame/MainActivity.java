@@ -14,6 +14,8 @@ import org.json.JSONObject;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.accounts.Account;
+import android.accounts.AccountManager;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -26,9 +28,12 @@ import android.support.v4.app.NavUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
@@ -46,8 +51,26 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
+		getActionBar().hide();
+		
 		prefs = getSharedPreferences(PREFS_NAME, 0);
-		editor = MainActivity.prefs.edit();		
+		editor = MainActivity.prefs.edit();
+		
+		LinearLayout header = (LinearLayout) findViewById(R.id.header);
+		
+		header.setOnClickListener(new OnClickListener(){
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				if(getActionBar().isShowing() == true) {
+					getActionBar().hide();
+				} else {
+					getActionBar().show();
+				}
+			}
+			
+		});
 		
 	}
 	
@@ -71,6 +94,11 @@ public class MainActivity extends Activity {
 		switch (item.getItemId()) {
 			case android.R.id.home:
 				NavUtils.navigateUpFromSameTask(this);
+				return true;
+			case R.id.fragment:
+				//Intent intent = new Intent(getBaseContext(), Main.class);
+					
+				//startActivity(intent);
 				return true;
 			case R.id.clear:
 				

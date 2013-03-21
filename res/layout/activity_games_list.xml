@@ -4,55 +4,18 @@
     android:layout_height="match_parent"
     tools:context=".GamesList" >
 	
-    <RelativeLayout
-        android:id="@+id/header"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-		android:gravity="center_vertical"
-		android:background="#CCCCCC"
-		android:padding="10dp"
-		>
-		
-		<TextView android:id="@+id/name"
-	    	android:layout_width="wrap_content"
-	    	android:layout_height="wrap_content"
-	    	android:textColor="#6E6E6E"
-	    	android:textSize="20dp"
-	    	android:textStyle="bold"
-	    	android:gravity="center_vertical|center_horizontal"/>
-		
-		<TextView android:id="@+id/desc" 
-	    	android:layout_width="wrap_content" 
-	     	android:layout_height="wrap_content" 
-	     	android:textSize="16dp"
-	     	android:textColor="#6E6E6E"
-	     	android:gravity="center_vertical|center_horizontal"
-	     	android:layout_below="@+id/name"/>
-		
-		<TextView android:id="@+id/count" 
-	    	android:layout_width="wrap_content" 
-	     	android:layout_height="wrap_content" 
-	     	android:textSize="20dp"
-	     	android:textColor="#6E6E6E"
-	     	android:gravity="center_vertical|center_horizontal"
-		    android:layout_alignParentRight="true"
-	     	/>
-        
-    </RelativeLayout>
-    
     <GridView
 	    android:id="@+id/games"
 	    android:layout_width="fill_parent"
-	    android:layout_height="fill_parent"
+	    android:layout_height="wrap_content"
 	    android:numColumns="3"
 		android:layout_centerHorizontal="true"
 	    android:stretchMode="columnWidth"
 	    android:gravity="center_vertical|center_horizontal"
-	    android:layout_below="@+id/header"
 	    android:scrollbars="none"
 	    android:padding="0dp"
 	    android:layout_margin="0dp"
+	    android:layout_centerInParent="true"
 	    />
     
 </RelativeLayout>

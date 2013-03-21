@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.View.OnKeyListener;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.support.v4.app.NavUtils;
@@ -20,6 +21,7 @@ import android.support.v4.app.NavUtils;
 public class Game extends Activity {
 	
 	static ImageView gImg;
+	static RelativeLayout actions;
 	static TextView gHint;
 	static EditText gAnswer;
 	static String close, answer, sound, hint, img, file = "";
@@ -30,7 +32,7 @@ public class Game extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_game);
 		// Show the Up button in the action bar.
-		//getActionBar().setDisplayHomeAsUpEnabled(true);
+		getActionBar().hide();
 		
 
 		Bundle extras = getIntent().getExtras();
@@ -50,13 +52,14 @@ public class Game extends Activity {
 		if(img != "") {
 			
 			gImg = (ImageView) findViewById(R.id.game);
+			actions = (RelativeLayout) findViewById(R.id.actions);
 			
 			correct = MainActivity.prefs.getInt(img, 0);
 			
 			if(correct == 1) {
-				gImg.setBackgroundColor(Color.GREEN);
+				actions.setVisibility(View.VISIBLE);
 			} else {
-				gImg.setBackgroundColor(Color.TRANSPARENT);
+				actions.setVisibility(View.INVISIBLE);
 			}
 			
 			gAnswer = (EditText) findViewById(R.id.answer);
@@ -134,7 +137,8 @@ public class Game extends Activity {
 				Log.i("correct_cnt","" + MainActivity.prefs.getInt(file+"_correct_cnt", 0));
 				
 				Toast.makeText(Game.this, "CORRECT!", Toast.LENGTH_LONG).show();
-				gImg.setBackgroundColor(Color.GREEN);
+
+				actions.setVisibility(View.VISIBLE);
 				
 			} else if(close.toLowerCase().contains(text)) {
 				

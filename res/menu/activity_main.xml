@@ -6,4 +6,11 @@
         android:showAsAction="never"
         android:title="Clear Data"/>
 
+    
+    <item
+        android:id="@+id/fragment"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="Fragment"/>
+    
 </menu>

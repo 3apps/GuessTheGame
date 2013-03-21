@@ -8,6 +8,7 @@ import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
+import android.view.View;
 import android.widget.ImageView;
 
 class loadImage extends AsyncTask<Object, Void, Bitmap> {
@@ -49,8 +50,10 @@ class loadImage extends AsyncTask<Object, Void, Bitmap> {
 
 		if (result != null && imv != null) {
 			imv.setImageBitmap(result);
+			imv.setVisibility(View.VISIBLE);
 		} else {
 			imv.setImageBitmap(null);
+			imv.setVisibility(View.INVISIBLE);
 		}
 	}
 

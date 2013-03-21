@@ -1,15 +1,11 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity" >
-	
-     <RelativeLayout 
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content"
-		android:background="@drawable/footer"
-		android:layout_alignParentBottom="true"
-		/>
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    tools:context=".GamesList">
     
     <LinearLayout
         android:id="@+id/header"
@@ -68,16 +64,21 @@
         
     </LinearLayout>
     
-    <ListView
-		android:id="@+id/levels"
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content"
-		android:paddingLeft="12dp"
-		android:paddingRight="12dp"
-	   	android:layout_below="@+id/header"
-	   	android:divider="@android:color/transparent"
-	   	android:dividerHeight="12dp"
-	   	android:paddingTop="12dp"
-	   	/>
-    
-</RelativeLayout>
+	<android.support.v4.view.ViewPager
+	    android:id="@+id/myfivepanelpager"
+	    android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+	
+	<com.viewpagerindicator.LinePageIndicator 
+        android:id="@+id/indicator"
+        android:padding="5dip"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        app:strokeWidth="4dp"
+        app:lineWidth="30dp"
+        app:unselectedColor="#FF888888"
+        app:selectedColor="#000000"
+        />
+	
+</LinearLayout>

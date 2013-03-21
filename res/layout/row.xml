@@ -12,7 +12,7 @@
         android:id="@+id/rowInner"
         android:layout_height="fill_parent"
         android:layout_width="fill_parent"
-        android:background="@drawable/grey_gradient"
+        android:layout_margin="1dp"
         >
 		
 		<RelativeLayout 
@@ -28,7 +28,7 @@
 				android:id="@+id/img"
 				android:layout_width="50dp"
 		        android:layout_height="50dp"
-				android:src="@drawable/ic_game" 
+				android:src="@drawable/ic_game"
 				/>
 		    		
 			<TextView android:id="@+id/name"
@@ -57,13 +57,13 @@
 	
     <RelativeLayout
 	    android:id="@+id/actions"
-	    android:layout_width="57dp"
-	    android:layout_height="35dp"
+	    android:layout_width="63dp"
+	    android:layout_height="41dp"
 	    android:layout_alignParentRight="true"
 	    android:layout_centerVertical="true"
 	    android:gravity="center_vertical|center_horizontal"
 	    android:background="@drawable/locked"
-	    android:layout_marginTop="2dp"
+	    android:layout_marginRight="-2dp"
 	    >
 		
 		<TextView android:id="@+id/percent" 

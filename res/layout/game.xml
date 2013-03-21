@@ -1,39 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	android:layout_height="fill_parent"
+	android:layout_width="80dp"
+	android:layout_height="80dp"
 	android:gravity="center_horizontal|center_vertical"
-	android:layout_width="fill_parent"
 	android:paddingBottom="10dp"
 	android:paddingTop="10dp" 
 	android:paddingLeft="10dp"
-	android:paddingRight="10dp">
-  
-	<ImageView
-		android:id="@+id/game"
-		android:layout_width="80dp"
-        android:layout_height="80dp"
-		android:src="@drawable/ic_game" 
-		android:background="#FFFFFF"
-		android:padding="1dp"
-		/>
-	<!-- 
-		<RelativeLayout
-	    android:layout_width="fill_parent"
-	    android:layout_height="fill_parent"
-	    android:background="#000000"
-	    android:visibility="visible"
-	    >
-	    
-	    <ImageView
-	        android:id="@+id/tick"
-	        android:layout_width="20dp"
-	        android:layout_height="20dp"
-	        android:background="#FFFFFF"
-	        android:layout_centerHorizontal="true"
-	        android:layout_centerVertical="true"
-	        android:layout_centerInParent="true"
-	        />
-	    
+	android:paddingRight="10dp"
+	>
+  	
+    <RelativeLayout
+        android:layout_width="80dp"
+	    android:layout_height="80dp"
+        android:background="@drawable/borders"
+        android:padding="5dp"
+        >
+        
+		<ImageView
+			android:id="@+id/game"
+			android:layout_width="80dp"
+	        android:layout_height="80dp"
+			android:src="@drawable/ic_game" 
+			android:padding="1dp"
+			/>
+		
 	</RelativeLayout>
-		 -->
+	
+    <RelativeLayout
+	    android:id="@+id/actions"
+	    android:layout_width="53dp"
+	    android:layout_height="31dp"
+	    android:layout_centerVertical="true"
+	    android:gravity="right"
+	    android:background="@drawable/complete"
+	    android:layout_marginLeft="30dp"
+	    android:visibility="invisible"
+	    >
+			
+	</RelativeLayout>
+	
 </RelativeLayout>

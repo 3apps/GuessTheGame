@@ -77,7 +77,7 @@ class LevelListAdaptor extends ArrayAdapter<Levels> {
         
         //If level is 100% complete style row
         if(percent == 100) {
-        	aa.setBackgroundResource(R.drawable.tick);
+        	aa.setBackgroundResource(R.drawable.complete);
         	dd.setText("Completed");
         }
                 
