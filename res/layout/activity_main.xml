@@ -38,7 +38,7 @@
 	            android:id="@+id/username" 
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
-	            android:text="TIME TAKEN"
+	            android:text="OVERALL TIME TAKEN"
 	            android:layout_alignParentRight="true"
 	            android:textColor="#FFFFFF"
 	            android:layout_marginRight="6dp"

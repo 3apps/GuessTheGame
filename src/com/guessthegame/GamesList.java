@@ -94,10 +94,6 @@ import android.widget.TextView;
 			// After a pause OR at startup
 			super.onResume();
 			
-			TextView timeText =  (TextView) findViewById(R.id.time);
-			
-			timeText.setText(MainActivity.getTime());
-			
 			Bundle extras = getIntent().getExtras();
 			
 			if(extras != null) {
@@ -110,7 +106,12 @@ import android.widget.TextView;
 			if(file != "") {
 	
 				gamesCnt = MainActivity.prefs.getInt(file+"_cnt", 0);
-	
+				Long totalTimeF = MainActivity.prefs.getLong(file+"_totalTime", 0);
+				
+				TextView timeText =  (TextView) findViewById(R.id.time);
+				
+				timeText.setText(MainActivity.getTime(totalTimeF));
+				
 				MyPagerAdapter adapterP = new MyPagerAdapter();
 			    myPager = (ViewPager) findViewById(R.id.myfivepanelpager);
 			    myPager.setAdapter(adapterP);

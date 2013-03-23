@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.LinearLayout.LayoutParams;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -48,6 +49,8 @@ class LevelListAdaptor extends ArrayAdapter<Levels> {
         TextView 		nn = (TextView) v.findViewById(R.id.name);
         TextView 		dd = (TextView) v.findViewById(R.id.desc);
         RelativeLayout 	aa = (RelativeLayout) v.findViewById(R.id.actions);
+        LinearLayout	pp = (LinearLayout) v.findViewById(R.id.progress_holder);
+        LinearLayout	pb = (LinearLayout) v.findViewById(R.id.progress_bar);
         
         //Clear Image
         ii.setImageDrawable(null);
@@ -72,6 +75,9 @@ class LevelListAdaptor extends ArrayAdapter<Levels> {
         
         //Work out the percentage correct for the level. MUST BE DOUBLE
         double percent = ((double) correctCnt/noGames)*100;
+        
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(0, 2, (float) percent);
+        pb.setLayoutParams(params);
         
         //If level is 100% complete style row
         if(percent == 100) {

@@ -36,6 +36,10 @@ public class Game extends Activity {
 		
 		startTime = System.currentTimeMillis();
 		
+		SharedPreferences.Editor editor = MainActivity.prefs.edit();
+		
+		updateHints();
+		
 		Bundle extras = getIntent().getExtras();
 		
 		if(extras != null) {
@@ -58,6 +62,7 @@ public class Game extends Activity {
 			correct = MainActivity.prefs.getInt(img, 0);
 			
 			if(correct == 1) {
+				
 				actions.setVisibility(View.VISIBLE);
 			} else {
 				actions.setVisibility(View.INVISIBLE);
@@ -121,10 +126,10 @@ public class Game extends Activity {
 	
 	public void checkAnswer(String text) {
 		
+		SharedPreferences.Editor editor = MainActivity.prefs.edit();
+		
 		if(correct == 0) {
 		
-			SharedPreferences.Editor editor = MainActivity.prefs.edit();
-			
 			if(text.toLowerCase().equals(answer)) {
 				
 				long difference = System.currentTimeMillis() - startTime;
@@ -132,15 +137,38 @@ public class Game extends Activity {
 				int correctCnt = MainActivity.prefs.getInt(file+"_correct_cnt", 0);
 				
 				long totalTime = MainActivity.prefs.getLong("totalTime", 0);
+				long totalTimeF = MainActivity.prefs.getLong(file+"_totalTime", 0);
+				
+				int inaRow = MainActivity.prefs.getInt("inaRow",0);
+				
+				int hintCnt = MainActivity.prefs.getInt("hintCnt",0);
 				
 				int currentCorrect = (correctCnt+1);
 				
-				editor.putLong("totalTime", totalTime+difference);
-				editor.putInt(file+"_correct_cnt", currentCorrect);
-				editor.putInt(img, 1);
-				editor.commit();
+				int inaRowCnt = (inaRow+1);
+				
+				Long newtotalTime = (totalTime + difference);
+				Long newtotalTimeF= (totalTimeF + difference);
 
+				Log.i("time","difference " + difference + " + totalTime " + totalTime + " = " + newtotalTime);
+				
+				editor.putLong("totalTime", newtotalTime);
+				editor.putLong(file+"_totalTime", newtotalTimeF);
+				editor.putInt(file+"_correct_cnt", currentCorrect);
+				editor.putInt("inaRow", inaRowCnt);
+				editor.putInt(img, 1);
+				
 				actions.setVisibility(View.VISIBLE);
+				
+				if(inaRowCnt%3 == 0) {
+				
+					Toast.makeText(Game.this, inaRowCnt + " in a row! Free Hint!", Toast.LENGTH_LONG).show();
+					
+					int hintCnts = (hintCnt+1);
+					
+					editor.putInt("hintCnt", hintCnts);
+					
+				}
 				
 			} else if(close.toLowerCase().contains(text)) {
 				
@@ -149,8 +177,25 @@ public class Game extends Activity {
 			} else {
 				Toast.makeText(Game.this, "Wrong, try again!", Toast.LENGTH_LONG).show();
 				gAnswer.setText("");
+				
+				editor.putInt("inaRow", 0);
+				
 			}
 		}
+		
+		editor.commit();
+		
+		updateHints();
+		
+	}
+	
+	public void updateHints() {
+		
+		TextView hintText =  (TextView) this.findViewById(R.id.hints);
+		
+		int hintCnt = MainActivity.prefs.getInt("hintCnt",0);
+		
+		hintText.setText("" + hintCnt);
 		
 	}
 

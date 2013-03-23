@@ -30,7 +30,7 @@
 				/>
 	        
 	        <TextView
-	            android:id="@+id/username" 
+	            android:id="@+id/hintText" 
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
 	            android:text="HINTS LEFT"
@@ -46,11 +46,11 @@
 	            />
 	        
 	        <TextView
-	            android:id="@+id/time" 
+	            android:id="@+id/hints" 
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
-	            android:text="2"
-	            android:layout_below="@+id/username"
+	            android:text="0"
+	            android:layout_below="@+id/hintText"
 	            android:textSize="36dp"
 	            android:textColor="#b6d74d"
 	            android:layout_marginRight="4dp"

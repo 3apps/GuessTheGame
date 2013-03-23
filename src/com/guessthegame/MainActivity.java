@@ -86,19 +86,19 @@ public class MainActivity extends Activity {
 		
 		TextView timeText =  (TextView) findViewById(R.id.time);
 		
-		timeText.setText(MainActivity.getTime());
+		long totalTime = MainActivity.prefs.getLong("totalTime", 0);
+		
+		timeText.setText(MainActivity.getTime(totalTime));
 		
 		new LoadJsonTask().execute();
 			
 	}
 	
-	public static String getTime() {
+	public static String getTime(Long totalTimes) {
 		
-		long totalTime = MainActivity.prefs.getLong("totalTime", 0);
-		
-		long seconds = (long) (totalTime / 1000) % 60 ;
-		long minutes = (long) ((totalTime / (1000*60)) % 60);
-		long hours   = (long) ((totalTime / (1000*60*60)) % 24);
+		long seconds = (long) (totalTimes / 1000) % 60 ;
+		long minutes = (long) ((totalTimes / (1000*60)) % 60);
+		long hours   = (long) ((totalTimes / (1000*60*60)) % 24);
 		
 		return String.format("%02d:%02d:%02d",(int) hours,(int) minutes,(int) seconds);
 		
@@ -145,37 +145,37 @@ public class MainActivity extends Activity {
        }
        protected void onPostExecute(ArrayList<Levels> mylist){
 
-    	   	ListView listViewLevels = (ListView) findViewById(R.id.levels);
-   		
-   			adaptor = new LevelListAdaptor(MainActivity.this,R.layout.row, mylist);
-   		
-   			listViewLevels.setAdapter(adaptor);
-   			
-   			listViewLevels.setClickable(true);
-   			
-   			listViewLevels.setOnItemClickListener(new OnItemClickListener() {
+	   	ListView listViewLevels = (ListView) findViewById(R.id.levels);
+	
+		adaptor = new LevelListAdaptor(MainActivity.this,R.layout.row, mylist);
+	
+		listViewLevels.setAdapter(adaptor);
+		
+		listViewLevels.setClickable(true);
+		
+		listViewLevels.setOnItemClickListener(new OnItemClickListener() {
 
-   				@Override
-   				public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-   					// TODO Auto-generated method stub
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				// TODO Auto-generated method stub
+				
+				Levels level = adaptor.getItem(position);
+				
+				if(level.paid.toString().contains("no")) {
+				
+   					Intent intent = new Intent(getBaseContext(), GamesList.class);
    					
-   					Levels level = adaptor.getItem(position);
+   					intent.putExtra("FILE", level.file);
+   					intent.putExtra("NAME", level.name);
+   					intent.putExtra("DESC", level.desc);
+   					intent.putExtra("IMG", level.img);
    					
-   					if(level.paid.toString().contains("no")) {
+   					startActivity(intent);
    					
-	   					Intent intent = new Intent(getBaseContext(), GamesList.class);
-	   					
-	   					intent.putExtra("FILE", level.file);
-	   					intent.putExtra("NAME", level.name);
-	   					intent.putExtra("DESC", level.desc);
-	   					intent.putExtra("IMG", level.img);
-	   					
-	   					startActivity(intent);
-	   					
-   					}
-   				}
-   				
-   			});
+				}
+			}
+			
+		});
            
        }
     }

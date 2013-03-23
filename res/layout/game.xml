@@ -7,6 +7,7 @@
 	android:paddingTop="10dp" 
 	android:paddingLeft="10dp"
 	android:paddingRight="10dp"
+	android:animateLayoutChanges="true"
 	>
   	
     <RelativeLayout
@@ -35,6 +36,7 @@
 	    android:background="@drawable/complete"
 	    android:layout_marginLeft="40dp"
 	    android:visibility="invisible"
+	    android:animateLayoutChanges="true"
 	    >
 			
 	</RelativeLayout>
