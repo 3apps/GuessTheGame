@@ -57,9 +57,11 @@ class LevelListAdaptor extends ArrayAdapter<Levels> {
         ii.setImageDrawable(null);
         
         if(o.paid.toString().contains("no")) {
+        	pp.setVisibility(View.VISIBLE);
         	aa.setBackgroundResource(R.drawable.start);
         	Log.i("paid","" + o.paid);
         } else {
+        	pp.setVisibility(View.INVISIBLE);
         	aa.setBackgroundResource(R.drawable.locked);
         }
         

@@ -62,6 +62,7 @@
 			android:weightSum="100"
 			android:padding="1dip"
 			android:layout_marginLeft="65dp"
+			android:visibility="invisible"
 		    >
 		    
 		    <LinearLayout 

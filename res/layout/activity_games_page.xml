@@ -79,13 +79,13 @@
 		android:padding="1dip"
 		android:layout_marginTop="-6dip"
 	    >
-	    
+	    <!-- android:background="#D1FF29" -->
 	    <LinearLayout 
 	    	android:id="@+id/progress_bar"
 		    android:layout_width="0dip"
 		    android:layout_weight="0"
 		    android:layout_height="4dip"
-			android:background="#D1FF29"
+			android:background="@drawable/progress_bar"
 		    />
 	    
 	</LinearLayout>
@@ -98,11 +98,11 @@
         >
     
 	    <TextView 
-		    android:id="@+id/answered"
+		    android:id="@+id/progress"
 		    android:layout_width="wrap_content"
 		    android:layout_height="match_parent"
 		    android:textColor="#A6A6A6"
-		    android:text="12 of 34"
+		    android:text=""
 		    android:textSize="18sp"
 		    android:layout_gravity="center_horizontal"
 		    android:shadowColor="#FFFFFF"

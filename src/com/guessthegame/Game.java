@@ -4,6 +4,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.util.Log;
@@ -28,7 +29,7 @@ public class Game extends Activity {
 	static String close, answer, sound, hint, img, file = "";
 	static int correct;	
 	long startTime;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -50,8 +51,6 @@ public class Game extends Activity {
 			sound	= extras.getString("SOUND");
 			answer	= extras.getString("ANSWER");
 			close	= extras.getString("CLOSE");
-			
-			Log.i("FILE",""+file);
 			
 		}
 		
@@ -130,8 +129,16 @@ public class Game extends Activity {
 		SharedPreferences.Editor editor = MainActivity.prefs.edit();
 		
 		if(correct == 0) {
-		
-			if(text.toLowerCase().equals(answer)) {
+			
+			int fuzzy = LevenshteinDistance.computeDistance(text, answer);
+			
+			if(text.toLowerCase().equals(answer) || fuzzy < 2) {
+				
+				if(fuzzy > 0) {
+					Toast.makeText(Game.this, "Ok we will let you have that one!", Toast.LENGTH_LONG).show();
+				}
+				
+				gAnswer.setText(answer);
 				
 				long difference = System.currentTimeMillis() - startTime;
 				
@@ -151,8 +158,6 @@ public class Game extends Activity {
 				Long newtotalTime = (totalTime + difference);
 				Long newtotalTimeF= (totalTimeF + difference);
 
-				Log.i("time","difference " + difference + " + totalTime " + totalTime + " = " + newtotalTime);
-				
 				editor.putLong("totalTime", newtotalTime);
 				editor.putLong(file+"_totalTime", newtotalTimeF);
 				editor.putInt(file+"_correct_cnt", currentCorrect);
@@ -174,11 +179,12 @@ public class Game extends Activity {
 				Handler handler = new Handler();
 				handler.postDelayed(new Runnable() {
 				    public void run() {
+				    	
 				    	Game.super.onBackPressed();
 				    }
 				}, 1000);
 				
-			} else if(close.toLowerCase().contains(text)) {
+			} else if(close.toLowerCase().contains(text) || (fuzzy > 2 & fuzzy < 5)) {
 				
 				Toast.makeText(Game.this, "Soo close, try again!", Toast.LENGTH_LONG).show();
 				

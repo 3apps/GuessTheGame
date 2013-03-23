@@ -10,6 +10,7 @@ import org.json.JSONObject;
 
 	import com.viewpagerindicator.LinePageIndicator;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.Parcelable;
 import android.app.Activity;
 import android.support.v4.app.NavUtils;
@@ -37,6 +38,7 @@ import android.widget.TextView;
 		int gamesCnt = 0;
 		int pagesNo = 1;
 		static int currentPage = 0;
+		Boolean redirect = false;
 		
 		private class MyPagerAdapter extends PagerAdapter {
 	        public int getCount() {
@@ -102,6 +104,7 @@ import android.widget.TextView;
 				name	= extras.getString("NAME");
 				desc	= extras.getString("DESC");
 				img		= extras.getString("IMG");
+				redirect= extras.getBoolean("redirect");
 			}
 	
 			if(file != "") {
@@ -117,13 +120,15 @@ import android.widget.TextView;
 		        double percent = ((double) correctCnt/noGames)*100;
 				
 				TextView timeText =  (TextView) findViewById(R.id.time);
-				
+				TextView progress = (TextView) findViewById(R.id.progress);
 				LinearLayout	pb = (LinearLayout) findViewById(R.id.progress_bar);
 				
 				LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(0, 6, (float) percent);
 		        pb.setLayoutParams(params);
 		        
 				timeText.setText(MainActivity.getTime(totalTimeF));
+				
+				progress.setText( correctCnt + " of " + noGames );
 				
 				MyPagerAdapter adapterP = new MyPagerAdapter();
 			    myPager = (ViewPager) findViewById(R.id.myfivepanelpager);
@@ -133,7 +138,7 @@ import android.widget.TextView;
 			    //Bind the title indicator to the adapter
 			    LinePageIndicator titleIndicator = (LinePageIndicator)findViewById(R.id.indicator);
 			    titleIndicator.setViewPager(myPager);
-				
+
 			}
 			
 		}
@@ -187,9 +192,7 @@ import android.widget.TextView;
 	
 				int startNo = (position == 1 ? 0 : (position-1) * perPage + 1);
 				int endNo	= ((startNo+perPage) > gamesCnt ? gamesCnt : (startNo+perPage));
-				
-				Log.i("info",position + " - " + startNo + " <= " + endNo + " | " + gamesArr.length());
-	
+
 				for(int currentNo = startNo; currentNo < endNo; currentNo++) {
 	
 					JSONObject j = gamesArr.getJSONObject(currentNo);
