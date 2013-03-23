@@ -1,8 +1,0 @@
-{
-	"name" 	: 	"Nintendo pack",
-	"desc"	: 	"All the best games",
-	"img"	: 	"pokemon.jpg",
-	"paid"	:	"yes",
-	"games"	: 	[]
-
-}
