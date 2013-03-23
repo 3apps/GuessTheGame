@@ -2,6 +2,7 @@ package com.guessthegame;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -169,6 +170,13 @@ public class Game extends Activity {
 					editor.putInt("hintCnt", hintCnts);
 					
 				}
+				
+				Handler handler = new Handler();
+				handler.postDelayed(new Runnable() {
+				    public void run() {
+				    	Game.super.onBackPressed();
+				    }
+				}, 1000);
 				
 			} else if(close.toLowerCase().contains(text)) {
 				

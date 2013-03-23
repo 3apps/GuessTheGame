@@ -35,10 +35,10 @@
 				/>
 	        
 	        <TextView
-	            android:id="@+id/username" 
+	            android:id="@+id/timeText" 
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
-	            android:text="OVERALL TIME TAKEN"
+	            android:text="OVERALL TIME"
 	            android:layout_alignParentRight="true"
 	            android:textColor="#FFFFFF"
 	            android:layout_marginRight="6dp"
@@ -55,13 +55,17 @@
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
 	            android:text=""
-	            android:layout_below="@+id/username"
+	            android:layout_below="@+id/timeText"
 	            android:textSize="36dp"
 	            android:textColor="#b6d74d"
 	            android:layout_marginRight="4dp"
 	            android:layout_marginTop="-5dp"
 	            android:gravity="center_vertical|center_horizontal"
 	            android:layout_alignParentRight="true"
+	            android:shadowColor="#363636"
+			    android:shadowDx="-1"
+			    android:shadowDy="-1"
+			    android:shadowRadius="0.6"
 	            />
 	        
         </RelativeLayout>

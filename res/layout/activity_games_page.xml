@@ -58,12 +58,61 @@
 	            android:layout_marginTop="-5dp"
 	            android:gravity="center_vertical|center_horizontal"
 	            android:layout_alignParentRight="true"
+	            android:shadowColor="#363636"
+			    android:shadowDx="-1"
+			    android:shadowDy="-1"
+			    android:shadowRadius="0.6"
 	            />
 	        
         </RelativeLayout>
         
     </LinearLayout>
     
+    <LinearLayout 
+	    android:id="@+id/progress_holder"
+	    android:layout_width="match_parent"
+	    android:layout_height="6dip"
+	    android:layout_below="@+id/header"
+	    android:orientation="horizontal"
+		android:background="#565656"
+		android:weightSum="100"
+		android:padding="1dip"
+		android:layout_marginTop="-6dip"
+	    >
+	    
+	    <LinearLayout 
+	    	android:id="@+id/progress_bar"
+		    android:layout_width="0dip"
+		    android:layout_weight="0"
+		    android:layout_height="4dip"
+			android:background="#D1FF29"
+		    />
+	    
+	</LinearLayout>
+    
+    <LinearLayout 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="20dip"
+        >
+    
+	    <TextView 
+		    android:id="@+id/answered"
+		    android:layout_width="wrap_content"
+		    android:layout_height="match_parent"
+		    android:textColor="#A6A6A6"
+		    android:text="12 of 34"
+		    android:textSize="18sp"
+		    android:layout_gravity="center_horizontal"
+		    android:shadowColor="#FFFFFF"
+		    android:shadowDx="1"
+		    android:shadowDy="1"
+		    android:shadowRadius="0.6"
+		    />
+	    
+	</LinearLayout>
+	
 	<android.support.v4.view.ViewPager
 	    android:id="@+id/myfivepanelpager"
 	    android:layout_width="fill_parent"

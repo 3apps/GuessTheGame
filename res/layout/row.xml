@@ -35,7 +35,11 @@
 	    	android:gravity="center_vertical|center_horizontal"
 	    	android:layout_toLeftOf="@+id/ic_game"
 	    	android:layout_marginLeft="65dp"
-	    	android:textAllCaps="true"/>"
+	    	android:textAllCaps="true"
+	    	android:shadowColor="#FFFFFF"
+		    android:shadowDx="1"
+		    android:shadowDy="1"
+		    android:shadowRadius="0.6"/>
 		
 		<TextView android:id="@+id/desc" 
 	    	android:layout_width="wrap_content" 
@@ -68,14 +72,14 @@
 				android:background="#D1FF29"
 			    />
 		    
-		</LinearLayout>
+		</LinearLayout>"
 		
 	</RelativeLayout>
 		
     <RelativeLayout
 	    android:id="@+id/actions"
-	    android:layout_width="63dp"
-	    android:layout_height="41dp"
+	    android:layout_width="63dip"
+	    android:layout_height="41dip"
 	    android:layout_alignParentRight="true"
 	    android:layout_centerVertical="true"
 	    android:gravity="center_vertical|center_horizontal"

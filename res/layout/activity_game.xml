@@ -57,6 +57,10 @@
 	            android:layout_marginTop="-5dp"
 	            android:gravity="center_vertical|center_horizontal"
 	            android:layout_alignParentRight="true"
+	            android:shadowColor="#363636"
+			    android:shadowDx="-1"
+			    android:shadowDy="-1"
+			    android:shadowRadius="0.6"
 	            />
 	        
         </RelativeLayout>

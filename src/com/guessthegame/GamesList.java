@@ -21,6 +21,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.GridView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 	
 	public class GamesList extends Activity {
@@ -108,8 +109,20 @@ import android.widget.TextView;
 				gamesCnt = MainActivity.prefs.getInt(file+"_cnt", 0);
 				Long totalTimeF = MainActivity.prefs.getLong(file+"_totalTime", 0);
 				
+				//Shared preferences for number of games in the level and number of correct answers for the level
+		        int noGames 	= ((int) MainActivity.prefs.getInt(file+"_cnt", 0));
+		        int correctCnt 	= ((int) MainActivity.prefs.getInt(file+"_correct_cnt", 0));
+				
+				//Work out the percentage correct for the level. MUST BE DOUBLE
+		        double percent = ((double) correctCnt/noGames)*100;
+				
 				TextView timeText =  (TextView) findViewById(R.id.time);
 				
+				LinearLayout	pb = (LinearLayout) findViewById(R.id.progress_bar);
+				
+				LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(0, 6, (float) percent);
+		        pb.setLayoutParams(params);
+		        
 				timeText.setText(MainActivity.getTime(totalTimeF));
 				
 				MyPagerAdapter adapterP = new MyPagerAdapter();
@@ -120,7 +133,6 @@ import android.widget.TextView;
 			    //Bind the title indicator to the adapter
 			    LinePageIndicator titleIndicator = (LinePageIndicator)findViewById(R.id.indicator);
 			    titleIndicator.setViewPager(myPager);
-		        //new LoadJsonTask().execute();
 				
 			}
 			
