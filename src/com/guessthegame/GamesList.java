@@ -190,7 +190,7 @@ import android.widget.TextView;
 				
 				int gamesCnt = gamesArr.length();
 	
-				int startNo = (position == 1 ? 0 : (position-1) * perPage + 1);
+				int startNo = (position == 1 ? 0 : (position-1) * perPage);
 				int endNo	= ((startNo+perPage) > gamesCnt ? gamesCnt : (startNo+perPage));
 
 				for(int currentNo = startNo; currentNo < endNo; currentNo++) {

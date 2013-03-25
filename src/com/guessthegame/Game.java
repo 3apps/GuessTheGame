@@ -4,6 +4,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -12,11 +13,17 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.View.OnKeyListener;
+import android.view.WindowManager;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.TextView.OnEditorActionListener;
 import android.widget.Toast;
 import android.support.v4.app.NavUtils;
 
@@ -38,7 +45,7 @@ public class Game extends Activity {
 		
 		startTime = System.currentTimeMillis();
 		
-		SharedPreferences.Editor editor = MainActivity.prefs.edit();
+		final SharedPreferences.Editor editor = MainActivity.prefs.edit();
 		
 		updateHints();
 		
@@ -91,6 +98,63 @@ public class Game extends Activity {
 			gHint.setText(hint);
 			
 			new loadImage(this, gImg, "images/" + img).execute();
+			
+			Button checkBtn = (Button) findViewById(R.id.check);
+			
+			checkBtn.setOnClickListener(new OnClickListener(){
+
+				@Override
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+					checkAnswer(gAnswer.getText().toString());
+				}
+				
+			});
+			
+			gAnswer.setOnEditorActionListener(new OnEditorActionListener() {
+
+				public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+					if (actionId == EditorInfo.IME_ACTION_GO) {
+						// your additional processing... 
+						checkAnswer(gAnswer.getText().toString());
+						return true;
+					} else {
+						return false;
+					}
+				}
+
+			});
+			
+			Button hintBtn = (Button) findViewById(R.id.hintBtn);
+			
+			hintBtn.setOnClickListener(new OnClickListener(){
+
+				@Override
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+					if(gHint.getVisibility() == View.INVISIBLE) {
+						InputMethodManager inputManager = 
+						        (InputMethodManager) Game.this.
+						            getSystemService(Context.INPUT_METHOD_SERVICE); 
+						inputManager.hideSoftInputFromWindow(
+						        Game.this.getCurrentFocus().getWindowToken(),
+						        InputMethodManager.HIDE_NOT_ALWAYS); 
+						
+						int hintCnts = MainActivity.prefs.getInt("hintCnt",0);
+						
+						int hintCntss = (hintCnts-1);
+						
+						editor.putInt("hintCnt", (hintCntss > 0 ? hintCntss : 0 ));
+						
+						editor.commit();
+						
+						updateHints();
+						
+						gHint.setVisibility(View.VISIBLE);
+					}
+				}
+				
+			});
 
 		}
 	
@@ -128,18 +192,38 @@ public class Game extends Activity {
 		
 		SharedPreferences.Editor editor = MainActivity.prefs.edit();
 		
+		String[] answerArr = answer.split(",");
+		
 		if(correct == 0) {
 			
-			int fuzzy = LevenshteinDistance.computeDistance(text, answer);
+			int fuzzy;
+			int lowestFuzzy = 100;
+			boolean correctAnswer = false;
 			
-			if(text.toLowerCase().equals(answer) || fuzzy < 2) {
+			for (String answer : answerArr) {
 				
-				if(fuzzy > 0) {
-					Toast.makeText(Game.this, "Ok we will let you have that one!", Toast.LENGTH_LONG).show();
+				fuzzy = LevenshteinDistance.computeDistance(text, answer);
+				
+				if(fuzzy < lowestFuzzy) lowestFuzzy = fuzzy;
+				
+				if(text.toLowerCase().equals(answer) || fuzzy < 2) {
+					
+					correctAnswer = true;
+					
+					if(fuzzy > 0) {
+						Toast.makeText(Game.this, "Ok we will let you have that one!", Toast.LENGTH_LONG).show();
+						
+					}
+					
+					gAnswer.setText(answer);
+					
+					break;
 				}
 				
-				gAnswer.setText(answer);
-				
+			}
+			
+			if(correctAnswer == true) {
+								
 				long difference = System.currentTimeMillis() - startTime;
 				
 				int correctCnt = MainActivity.prefs.getInt(file+"_correct_cnt", 0);
@@ -184,7 +268,7 @@ public class Game extends Activity {
 				    }
 				}, 1000);
 				
-			} else if(close.toLowerCase().contains(text) || (fuzzy > 2 & fuzzy < 5)) {
+			} else if(lowestFuzzy < 4) {
 				
 				Toast.makeText(Game.this, "Soo close, try again!", Toast.LENGTH_LONG).show();
 				

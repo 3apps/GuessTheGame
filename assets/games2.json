@@ -1,0 +1,136 @@
+{
+	"name" 	: 	"Level 2",
+	"desc"	: 	"Beginners pack. Lets get started!",
+	"img"	: 	"",
+	"paid"	:	"no",
+	"games"	: 	[
+					{
+						"img" 	: "sonic.jpg",
+						"hint"	: "Collect rings and defeat Dr Robotnik.",
+						"sound"	: "",
+						"answer": "Sonic,Sonic the Hedgehog",
+						"close"	: ""	
+					},
+					{
+						"img" 	: "streetfighter2.jpg",
+						"hint"	: "\"Shoryuken!\"",
+						"sound"	: "",
+						"answer": "Street Fighter 2,SF2",
+						"close" : "Street Fighter"
+					},
+					{
+						"img" 	: "pong.jpg",
+						"hint"	: "Tennis, 70's style",
+						"sound"	: "",
+						"answer": "Pong",
+						"close"	: ""
+					},
+					{
+						"img" 	: "mario kart.jpg",
+						"hint"	: "Banana skins, shells and racing. The perfect combination.",
+						"sound"	: "",
+						"answer": "Mario Kart",
+						"close"	: "Mario"
+					},
+					{
+						"img" 	: "worms.jpg",
+						"hint"	: "\"Leave me alone!\"",
+						"sound"	: "",
+						"answer": "Worms,Worms 2,Worms Armageddon",
+						"close"	: ""
+					},
+					{
+						"img" 	: "lemmings.jpg",
+						"hint"	: "\"Oh No!\"",
+						"sound"	: "",
+						"answer": "Lemmings",
+						"close"	: ""
+					}
+					,
+					{
+						"img" 	: "halflife.jpg",
+						"hint"	: "The only game with a hero called Gordon?",
+						"sound"	: "",
+						"answer": "Half Life",
+						"close"	: ""
+					},
+					{
+						"img" 	: "donkey kong.jpg",
+						"hint"	: "A disgruntled ape meets a soon to be famous plumber...",
+						"sound"	: "",
+						"answer": "Donkey Kong,DK",
+						"close"	: ""
+					},
+					{
+						"img" 	: "skyrim.jpg",
+						"hint"	: "You too can be an adventurer, unless you take an arrow to the knee...",
+						"sound"	: "",
+						"answer": "Skyrim,Elder Scrolls V,Elder Scrolls V:Skyrim",
+						"close"	: "Oblivion,Morrowind,Elder Scrolls"
+					},
+					{
+						"img" 	: "mario.jpg",
+						"hint"	: "The world's most popular plumber!",
+						"sound"	: "",
+						"answer": "Mario,Super Mario Brothers,Super Mario",
+						"close"	: "Wario"
+					},
+					{
+						"img" 	: "counterstrike.jpg",
+						"hint"	: "Counter terrorism Half Life mod",
+						"sound"	: "",
+						"answer": "Counter-Strike,CounterStrike,Counter Strike,CS",
+						"close"	: ""
+					},
+					{
+						"img" 	: "resident evil.jpg",
+						"hint"	: "Zombie survival horror at it's finest.",
+						"sound"	: "",
+						"answer": "Resident Evil,Resi Evil",
+						"close"	: ""
+					},
+					{
+						"img" 	: "dr kawashima.jpg",
+						"hint"	: "Maths puzzles and telling the time has never been so addictive!",
+						"sound"	: "",
+						"answer": "Dr Kawashima,Brain Training,Brain age,How old is your brain",
+						"close"	: "Brain"
+					},
+					{
+						"img" 	: "portal.jpg",
+						"hint"	: "The cake is a lie.",
+						"sound"	: "",
+						"answer": "Portal",
+						"close"	: ""
+					},
+					{
+						"img" 	: "tetris.jpg",
+						"hint"	: "Russian puzzler with the catchiest theme tune ever written",
+						"sound"	: "",
+						"answer": "Tetris",
+						"close"	: ""
+					},
+					{
+						"img" 	: "zelda.jpg",
+						"hint"	: "It's too dangerous to go alone. Take this!",
+						"sound"	: "",
+						"answer": "Zelda,The Legend of Zelda",
+						"close"	: "Link"
+					},
+					{
+						"img" 	: "mortalkombat.jpg",
+						"hint"	: "\"Finish Him!\"",
+						"sound"	: "",
+						"answer": "Mortal Kombat,Mortal Kombat 2,MK",
+						"close"	: ""
+					},
+					{
+						"img" 	: "asteroids.jpg",
+						"hint"	: "Shoot the polygons with your polygon!",
+						"sound"	: "",
+						"answer": "Asteroids",
+						"close"	: ""
+					}
+				]
+
+}

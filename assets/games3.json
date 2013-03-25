@@ -1,8 +1,136 @@
 {
-	"name" 	: 	"Nintendo pack",
-	"desc"	: 	"All the best games",
-	"img"	: 	"pokemon.jpg",
-	"paid"	:	"yes",
-	"games"	: 	[]
+	"name" 	: 	"Level 3",
+	"desc"	: 	"Noob pack. Still pretty simple!",
+	"img"	: 	"",
+	"paid"	:	"no",
+	"games"	: 	[
+					{
+						"img" 	: "kirby.jpg",
+						"hint"	: "The hungriest platform hero around!",
+						"sound"	: "",
+						"answer": "Kirby",
+						"close"	: ""	
+					},
+					{
+						"img" 	: "pokemon.jpg",
+						"hint"	: "Gotta catch 'em all!",
+						"sound"	: "",
+						"answer": "Pokemon",
+						"close" : ""
+					},
+					{
+						"img" 	: "professorlayton.jpg",
+						"hint"	: "Luke! There's a hidden puzzle over here",
+						"sound"	: "",
+						"answer": "Professor Layton",
+						"close"	: ""
+					},
+					{
+						"img" 	: "final fantasy vii.jpg",
+						"hint"	: "Cloud VS Sephiroth. Gaming's greatest battle.",
+						"sound"	: "",
+						"answer": "Final Fantasy VII,Final Fantasy,FF7,FFVII",
+						"close"	: ""
+					},
+					{
+						"img" 	: "crash bandicoot.jpg",
+						"hint"	: "The PS1's original mascot. Just don't touch his wumpa fruits...",
+						"sound"	: "",
+						"answer": "Crash Bandicoot,Crash",
+						"close"	: ""
+					},
+					{
+						"img" 	: "the sims.jpg",
+						"hint"	: "Build a house, get married, have kids, and if you take the ladder out of the pool, die.",
+						"sound"	: "",
+						"answer": "The Sims,Sims",
+						"close"	: ""
+					}
+					,
+					{
+						"img" 	: "lego harry potter.jpg",
+						"hint"	: "Expelliarmus, block-style!",
+						"sound"	: "",
+						"answer": "Lego Harry Potter",
+						"close"	: ""
+					},
+					{
+						"img" 	: "halo.jpg",
+						"hint"	: "Control Master Chief John-117 and bring down the covenant....",
+						"sound"	: "",
+						"answer": "Halo",
+						"close"	: ""
+					},
+					{
+						"img" 	: "gta1.jpg",
+						"hint"	: "Gouranga!",
+						"sound"	: "",
+						"answer": "Grand Theft Auto,GTA,GTA1",
+						"close"	: ""
+					},
+					{
+						"img" 	: "splintercell.jpg",
+						"hint"	: "Sam Fisher sneaks around in this gadget filled stealth game.",
+						"sound"	: "",
+						"answer": "Splinter Cell, Tom Clancy's Splinter Cell",
+						"close"	: ""
+					},
+					{
+						"img" 	: "arkham city.jpg",
+						"hint"	: "Considered the best superhero game ever made.",
+						"sound"	: "",
+						"answer": "Arkham City,Batman Arkham City,Arkham Asylum,Batman Arkham Askylum",
+						"close"	: "Batman"
+					},
+					{
+						"img" 	: "metroid.jpg",
+						"hint"	: "Futuristic FPS/roll-em-up!",
+						"sound"	: "",
+						"answer": "Metroid",
+						"close"	: ""
+					},
+					{
+						"img" 	: "phoenix wright.jpg",
+						"hint"	: "HOLD IT! Courtroom drama doesn't get more fun than this!",
+						"sound"	: "",
+						"answer": "Phoenix Wright,Ace Attorney",
+						"close"	: ""
+					},
+					{
+						"img" 	: "theme hospital.jpg",
+						"hint"	: "Doctor needed in the inflater room...",
+						"sound"	: "",
+						"answer": "Theme Hospital",
+						"close"	: ""
+					},
+					{
+						"img" 	: "pikmin.jpg",
+						"hint"	: "Help Olimar rebuild his damaged spaceship by enslaving an otherwise peaceful race.",
+						"sound"	: "",
+						"answer": "Pikmin",
+						"close"	: ""
+					},
+					{
+						"img" 	: "guitar hero.jpg",
+						"hint"	: "Taking rhythm games to an all new level. An instant party classic.",
+						"sound"	: "",
+						"answer": "Guitar Hero,Rock Band",
+						"close"	: "Rocksmith"
+					},
+					{
+						"img" 	: "superbomberman.jpg",
+						"hint"	: "Drop a bomb, run away, repeat",
+						"sound"	: "",
+						"answer": "Super Bomberman,Bomberman",
+						"close"	: ""
+					},
+					{
+						"img" 	: "hitman.jpg",
+						"hint"	: "Agent 47. The ultimate assassin.",
+						"sound"	: "",
+						"answer": "Hitman,hit man",
+						"close"	: ""
+					}
+				]
 
 }

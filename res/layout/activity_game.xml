@@ -69,66 +69,103 @@
  
     <RelativeLayout
         android:id="@+id/gameholder"
-        android:layout_width="220dp"
+        android:layout_width="fill_parent"
 	    android:layout_height="220dp"
 	    android:layout_gravity="center_horizontal"
 	    android:layout_centerHorizontal="true"
-	 	android:layout_margin="20dp"
-	 	android:layout_marginTop="40dp"
 	 	android:layout_below="@+id/header"
         >
     	
-        <RelativeLayout
-	        android:layout_width="200dip"
-		    android:layout_height="200dip"
-	        android:background="@drawable/borders"
-	        android:layout_gravity="center_horizontal"
-	    	android:layout_centerHorizontal="true"
-	        android:padding="10dp"
-	        >
-	        
-		    <ImageView
-				android:id="@+id/game"
-				android:layout_width="200dip"
-		        android:layout_height="200dip"
-				android:src="@drawable/ic_game" 
-				/>
-		    
-		</RelativeLayout>
+        <ImageView
+			android:id="@+id/game"
+			android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+			android:scaleType="centerCrop"
+			android:adjustViewBounds="true"
+			android:src="@drawable/ic_game" 
+			/>
 	    
 	    <RelativeLayout
 		    android:id="@+id/actions"
 		    android:layout_width="63dp"
 		    android:layout_height="41dp"
-		    android:layout_centerVertical="true"
+		    android:layout_alignParentTop="true"
+		    android:layout_alignParentRight="true"
 		    android:gravity="right"
 		    android:background="@drawable/complete"
-		    android:layout_marginLeft="152dp"
+		    android:layout_marginTop="10dip"
 		    android:visibility="invisible"
+		    android:rotation="-90"
 		    />
-	
-	</RelativeLayout>
+		
+	    <Button
+	        android:id="@+id/hintBtn"
+	        android:layout_width="40dip"
+	        android:layout_height="40dip"
+	        android:background="@drawable/hint"
+	        android:layout_alignParentBottom="true"
+	        android:layout_alignParentRight="true"
+	        android:layout_marginBottom="30dip"
+	        android:layout_marginRight="10dip"
+	        
+	         />
 	    
-    <EditText 
-        android:id="@+id/answer"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:gravity="center"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/gameholder"
-        android:layout_marginTop="0dp"
-		android:imeOptions="actionGo"
-		android:hint="Type Answer..."
-		android:singleLine="true"
-		android:lines="1"
-		android:background="#ffffff"
-		android:padding="5dp"
-        />
+	</RelativeLayout>
+	
     
+    
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dip"
+        android:background="#565656"
+        android:layout_alignParentBottom="true"
+         >
+        
+	    <LinearLayout
+		    android:layout_width="fill_parent"
+		    android:layout_height="38dip"
+		    android:background="@drawable/answer_box"
+		    android:gravity="center_horizontal"
+		    android:padding="2dip"
+		    android:weightSum="100"
+		    >   
+		    <EditText 
+		        android:id="@+id/answer"
+		        android:layout_width="0dp"
+		        android:layout_height="wrap_content"
+		        android:layout_weight="70"
+		        android:layout_gravity="center_horizontal"
+		        android:gravity="left"
+		        android:layout_centerHorizontal="true"
+		        android:layout_marginTop="0dp"
+				android:imeOptions="actionGo"
+				android:inputType="textFilter"
+				android:hint="Type Answer..."
+				android:singleLine="true"
+				android:lines="1"
+				android:background="@android:color/transparent"
+				android:padding="5dp"
+		        />
+	    	
+		    <Button 
+		        android:id="@+id/check"
+		        android:layout_width="0dp"
+		        android:layout_height="fill_parent"
+		        android:layout_weight="30"
+		        android:text="CHECK"
+		        android:background="@drawable/button"
+		        android:layout_marginLeft="10dip"
+		        android:textColor="#ffffff"
+		        ></Button>
+		    
+		</LinearLayout>
+		
+	</LinearLayout>
+	
     <TextView
         android:id="@+id/hint"
-        android:layout_width="250dp"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
@@ -136,8 +173,12 @@
         android:background="@drawable/borders"
         android:textColor="#333333"
         android:layout_gravity="center_horizontal"
-        android:layout_below="@+id/answer"
+        android:layout_below="@+id/gameholder"
+        android:layout_margin="10dip"
         android:layout_marginTop="20dp"
-        android:padding="10dp" />
-
+        android:padding="30dp"
+        android:gravity="center"
+        android:visibility="invisible"
+        />
+    
 </RelativeLayout>

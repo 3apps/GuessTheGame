@@ -78,7 +78,7 @@ class LevelListAdaptor extends ArrayAdapter<Levels> {
         //Work out the percentage correct for the level. MUST BE DOUBLE
         double percent = ((double) correctCnt/noGames)*100;
         
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(0, 2, (float) percent);
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(0, LayoutParams.WRAP_CONTENT, (float) percent);
         pb.setLayoutParams(params);
         
         //If level is 100% complete style row
