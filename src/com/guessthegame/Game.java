@@ -132,7 +132,8 @@ public class Game extends Activity {
 				@Override
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
-					if(gHint.getVisibility() == View.INVISIBLE) {
+					int hintCntC = MainActivity.prefs.getInt("hintCnt",0);
+					if(gHint.getVisibility() == View.INVISIBLE && hintCntC > 0) {
 						InputMethodManager inputManager = 
 						        (InputMethodManager) Game.this.
 						            getSystemService(Context.INPUT_METHOD_SERVICE); 
