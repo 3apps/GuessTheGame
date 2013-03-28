@@ -37,7 +37,7 @@
             android:name="com.guessthegame.Game"
             android:label="@string/title_activity_game"
             android:parentActivityName="com.guessthegame.GamesList" 
-            android:windowSoftInputMode="stateAlwaysVisible|adjustResize"
+            android:windowSoftInputMode="stateHidden|adjustResize"
             android:screenOrientation="portrait"
             >
             <meta-data

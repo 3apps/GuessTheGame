@@ -16,106 +16,130 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnKeyListener;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.ScaleAnimation;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextSwitcher;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 import android.widget.Toast;
+import android.widget.ViewSwitcher.ViewFactory;
 import android.support.v4.app.NavUtils;
 
-public class Game extends Activity {
-	
+public class Game extends Activity implements ViewFactory {
+
 	static ImageView gImg;
 	static RelativeLayout actions;
 	static TextView gHint;
 	static EditText gAnswer;
 	static String close, answer, sound, hint, img, file = "";
-	static int correct;	
+	static int correct;
 	long startTime;
+	boolean hintGiven = false;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_game);
 		// Show the Up button in the action bar.
-		
+
 		startTime = System.currentTimeMillis();
-		
+
 		final SharedPreferences.Editor editor = MainActivity.prefs.edit();
-		
-		updateHints();
-		
+
+		updateHints(false);
+
 		Bundle extras = getIntent().getExtras();
-		
-		if(extras != null) {
-			file 	= extras.getString("FILE");
-			img 	= extras.getString("IMG");
-			hint	= extras.getString("HINT");
-			sound	= extras.getString("SOUND");
-			answer	= extras.getString("ANSWER");
-			close	= extras.getString("CLOSE");
-			
+
+		if (extras != null) {
+			file = extras.getString("FILE");
+			img = extras.getString("IMG");
+			hint = extras.getString("HINT");
+			sound = extras.getString("SOUND");
+			answer = extras.getString("ANSWER");
+			close = extras.getString("CLOSE");
+
 		}
-		
-		if(img != "") {
-			
+
+		if (img != "") {
+
 			gImg = (ImageView) findViewById(R.id.game);
 			actions = (RelativeLayout) findViewById(R.id.actions);
-			
+
 			correct = MainActivity.prefs.getInt(img, 0);
-			
-			if(correct == 1) {
-				
+
+			if (correct == 1) {
+
 				actions.setVisibility(View.VISIBLE);
 			} else {
 				actions.setVisibility(View.INVISIBLE);
 			}
-			
-			gAnswer = (EditText) findViewById(R.id.answer);
-			
-			if(correct == 1) gAnswer.setText(answer);
-			
-			gAnswer.setOnKeyListener(new OnKeyListener() {
-			    public boolean onKey(View v, int keyCode, KeyEvent event) {		        
-			        if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
-			              // Perform action on key press			              
-			              
-			              checkAnswer(gAnswer.getText().toString());
-			              
-			              return true;
-			            }
-			        
-			        return false;
-			    }
+
+			gImg.setOnClickListener(new OnClickListener() {
+
+				@Override
+				public void onClick(View v) {
+					// Perform action on key press
+					InputMethodManager inputManager = (InputMethodManager) Game.this
+							.getSystemService(Context.INPUT_METHOD_SERVICE);
+					inputManager.hideSoftInputFromWindow(Game.this
+							.getCurrentFocus().getWindowToken(),
+							InputMethodManager.HIDE_NOT_ALWAYS);
+
+				}
+
 			});
-			
+
+			gAnswer = (EditText) findViewById(R.id.answer);
+
+			if (correct == 1)
+				gAnswer.setText(answer);
+
+			gAnswer.setOnKeyListener(new OnKeyListener() {
+				public boolean onKey(View v, int keyCode, KeyEvent event) {
+					if ((event.getAction() == KeyEvent.ACTION_DOWN)
+							&& (keyCode == KeyEvent.KEYCODE_ENTER)) {
+						// Perform action on key press
+
+						checkAnswer(gAnswer.getText().toString());
+
+						return true;
+					}
+
+					return false;
+				}
+			});
+
 			gHint = (TextView) findViewById(R.id.hint);
-			
+
 			gHint.setText(hint);
-			
+
 			new loadImage(this, gImg, "images/" + img).execute();
-			
+
 			Button checkBtn = (Button) findViewById(R.id.check);
-			
-			checkBtn.setOnClickListener(new OnClickListener(){
+
+			checkBtn.setOnClickListener(new OnClickListener() {
 
 				@Override
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
 					checkAnswer(gAnswer.getText().toString());
 				}
-				
+
 			});
-			
+
 			gAnswer.setOnEditorActionListener(new OnEditorActionListener() {
 
-				public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+				public boolean onEditorAction(TextView v, int actionId,
+						KeyEvent event) {
 					if (actionId == EditorInfo.IME_ACTION_GO) {
-						// your additional processing... 
+						// your additional processing...
 						checkAnswer(gAnswer.getText().toString());
 						return true;
 					} else {
@@ -124,44 +148,51 @@ public class Game extends Activity {
 				}
 
 			});
-			
+
 			Button hintBtn = (Button) findViewById(R.id.hintBtn);
 			
-			hintBtn.setOnClickListener(new OnClickListener(){
+			hintBtn.setOnClickListener(new OnClickListener() {
 
 				@Override
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
-					int hintCntC = MainActivity.prefs.getInt("hintCnt",0);
-					if(gHint.getVisibility() == View.INVISIBLE && hintCntC > 0) {
-						InputMethodManager inputManager = 
-						        (InputMethodManager) Game.this.
-						            getSystemService(Context.INPUT_METHOD_SERVICE); 
-						inputManager.hideSoftInputFromWindow(
-						        Game.this.getCurrentFocus().getWindowToken(),
-						        InputMethodManager.HIDE_NOT_ALWAYS); 
+					int hintCntC = MainActivity.prefs.getInt("hintCnt", 0);
+					if (gHint.getVisibility() == View.INVISIBLE && ( hintCntC > 0 || hintGiven == true )) {
+						InputMethodManager inputManager = (InputMethodManager) Game.this
+								.getSystemService(Context.INPUT_METHOD_SERVICE);
+						inputManager.hideSoftInputFromWindow(Game.this
+								.getCurrentFocus().getWindowToken(),
+								InputMethodManager.HIDE_NOT_ALWAYS);
 						
-						int hintCnts = MainActivity.prefs.getInt("hintCnt",0);
+						if(hintGiven == false) {
 						
-						int hintCntss = (hintCnts-1);
+							int hintCnts = MainActivity.prefs.getInt("hintCnt", 0);
+	
+							int hintCntss = (hintCnts - 1);
+	
+							editor.putInt("hintCnt",
+									(hintCntss > 0 ? hintCntss : 0));
+	
+							editor.commit();
+	
+							updateHints(true);
+							hintGiven = true;
 						
-						editor.putInt("hintCnt", (hintCntss > 0 ? hintCntss : 0 ));
-						
-						editor.commit();
-						
-						updateHints();
-						
+						}
 						gHint.setVisibility(View.VISIBLE);
+						
+						
+					} else {
+						if(gHint.getVisibility() == View.VISIBLE) gHint.setVisibility(View.INVISIBLE);
 					}
 				}
-				
+
 			});
 
 		}
-	
-		
+
 	}
-	
+
 	private class DownloadImageTask extends AsyncTask<String, Void, String> {
 
 		@Override
@@ -169,13 +200,13 @@ public class Game extends Activity {
 			// TODO Auto-generated method stub
 			return null;
 		}
-		
+
 	}
-	
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		//getMenuInflater().inflate(R.menu.activity_game, menu);
+		// getMenuInflater().inflate(R.menu.activity_game, menu);
 		return true;
 	}
 
@@ -188,114 +219,155 @@ public class Game extends Activity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
-	
+
 	public void checkAnswer(String text) {
-		
+
 		SharedPreferences.Editor editor = MainActivity.prefs.edit();
-		
+
 		String[] answerArr = answer.split(",");
-		
-		if(correct == 0) {
-			
+
+		if (correct == 0) {
+
 			int fuzzy;
 			int lowestFuzzy = 100;
 			boolean correctAnswer = false;
-			
+
 			for (String answer : answerArr) {
-				
+
 				fuzzy = LevenshteinDistance.computeDistance(text, answer);
-				
-				if(fuzzy < lowestFuzzy) lowestFuzzy = fuzzy;
-				
-				if(text.toLowerCase().equals(answer) || fuzzy < 2) {
-					
+
+				if (fuzzy < lowestFuzzy)
+					lowestFuzzy = fuzzy;
+
+				if (text.toLowerCase().equals(answer) || fuzzy < 2) {
+
 					correctAnswer = true;
-					
-					if(fuzzy > 0) {
-						Toast.makeText(Game.this, "Ok we will let you have that one!", Toast.LENGTH_LONG).show();
-						
+
+					if (fuzzy > 0) {
+						Toast.makeText(Game.this,
+								"Ok we will let you have that one!",
+								Toast.LENGTH_LONG).show();
+
 					}
-					
+
 					gAnswer.setText(answer);
-					
+
 					break;
 				}
-				
+
 			}
-			
-			if(correctAnswer == true) {
-								
+
+			if (correctAnswer == true) {
+
 				long difference = System.currentTimeMillis() - startTime;
-				
-				int correctCnt = MainActivity.prefs.getInt(file+"_correct_cnt", 0);
-				
+
+				int correctCnt = MainActivity.prefs.getInt(file
+						+ "_correct_cnt", 0);
+
 				long totalTime = MainActivity.prefs.getLong("totalTime", 0);
-				long totalTimeF = MainActivity.prefs.getLong(file+"_totalTime", 0);
-				
-				int inaRow = MainActivity.prefs.getInt("inaRow",0);
-				
-				int hintCnt = MainActivity.prefs.getInt("hintCnt",0);
-				
-				int currentCorrect = (correctCnt+1);
-				
-				int inaRowCnt = (inaRow+1);
-				
+				long totalTimeF = MainActivity.prefs.getLong(file
+						+ "_totalTime", 0);
+
+				int inaRow = MainActivity.prefs.getInt("inaRow", 0);
+
+				int hintCnt = MainActivity.prefs.getInt("hintCnt", 0);
+
+				int currentCorrect = (correctCnt + 1);
+
+				int inaRowCnt = (inaRow + 1);
+
 				Long newtotalTime = (totalTime + difference);
-				Long newtotalTimeF= (totalTimeF + difference);
+				Long newtotalTimeF = (totalTimeF + difference);
 
 				editor.putLong("totalTime", newtotalTime);
-				editor.putLong(file+"_totalTime", newtotalTimeF);
-				editor.putInt(file+"_correct_cnt", currentCorrect);
+				editor.putLong(file + "_totalTime", newtotalTimeF);
+				editor.putInt(file + "_correct_cnt", currentCorrect);
 				editor.putInt("inaRow", inaRowCnt);
 				editor.putInt(img, 1);
-				
+
+				editor.commit();
+
 				actions.setVisibility(View.VISIBLE);
-				
-				if(inaRowCnt%3 == 0) {
-				
-					Toast.makeText(Game.this, inaRowCnt + " in a row! Free Hint!", Toast.LENGTH_LONG).show();
-					
-					int hintCnts = (hintCnt+1);
-					
+
+				int timeout = 1000;
+
+				if (inaRowCnt % 3 == 0) {
+
+					Toast.makeText(Game.this,
+							inaRowCnt + " in a row! Free Hint!",
+							Toast.LENGTH_LONG).show();
+
+					int hintCnts = (hintCnt + 1);
+
 					editor.putInt("hintCnt", hintCnts);
-					
+
+					editor.commit();
+
+					timeout = 2000;
+
+					updateHints(true);
+
 				}
-				
+
 				Handler handler = new Handler();
 				handler.postDelayed(new Runnable() {
-				    public void run() {
-				    	
-				    	Game.super.onBackPressed();
-				    }
-				}, 1000);
-				
-			} else if(lowestFuzzy < 4) {
-				
-				Toast.makeText(Game.this, "Soo close, try again!", Toast.LENGTH_LONG).show();
-				
+					public void run() {
+
+						Game.super.onBackPressed();
+					}
+				}, timeout);
+
+			} else if (lowestFuzzy < 4) {
+
+				Toast.makeText(Game.this, "Soo close, try again!",
+						Toast.LENGTH_LONG).show();
+
 			} else {
-				Toast.makeText(Game.this, "Wrong, try again!", Toast.LENGTH_LONG).show();
+				Toast.makeText(Game.this, "Wrong, try again!",
+						Toast.LENGTH_LONG).show();
 				gAnswer.setText("");
-				
+
+				Animation shake = AnimationUtils.loadAnimation(this,
+						R.anim.shake);
+				findViewById(R.id.game).startAnimation(shake);
+
 				editor.putInt("inaRow", 0);
-				
+
+				editor.commit();
+
 			}
 		}
-		
-		editor.commit();
-		
-		updateHints();
-		
+
 	}
-	
-	public void updateHints() {
-		
-		TextView hintText =  (TextView) this.findViewById(R.id.hints);
-		
-		int hintCnt = MainActivity.prefs.getInt("hintCnt",0);
-		
+
+	public void updateHints(Boolean animation) {
+
+		int hintCnt = MainActivity.prefs.getInt("hintCnt", 0);
+
+		Log.i("hintCNT", "" + hintCnt);
+
+		TextView hintText = (TextView) Game.this.findViewById(R.id.hints);
+
+		if (animation == true) {
+			Animation fadeOut = AnimationUtils.loadAnimation(this,
+					R.anim.fadeout);
+			hintText.startAnimation(fadeOut);
+		}
+
 		hintText.setText("" + hintCnt);
-		
+
+		if (animation == true) {
+			Animation fadeIn = AnimationUtils
+					.loadAnimation(this, R.anim.fadein);
+			hintText.startAnimation(fadeIn);
+		}
+
+	}
+
+	@Override
+	public View makeView() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
