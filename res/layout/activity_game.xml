@@ -170,21 +170,67 @@
 		</LinearLayout>
 		
 	</LinearLayout>
-	
+	    
     <TextView
         android:id="@+id/hint"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:text=""
-        android:background="@drawable/borders"
-        android:textColor="#333333"
+        android:background="#90000000"
+        android:textColor="#FFFFFF"
         android:layout_below="@+id/header"
-        
-        android:layout_margin="10dip"
         android:padding="30dp"
         android:gravity="center"
         android:visibility="invisible"
         />
+    
+    <RelativeLayout 
+        android:id="@+id/statusCover"
+        android:layout_height="fill_parent"
+        android:layout_width="fill_parent"
+        android:background="#90000000"
+        android:visibility="invisible"
+        >
+        
+        <TextView
+        	android:id="@+id/status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#ffffff"
+            android:gravity="center"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_centerInParent="true"
+            android:text="Correct!"
+            android:textSize="50dip"
+            android:textStyle="italic|bold"
+             />
+        
+         <TextView
+        	android:id="@+id/status_extra"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#e2ef65"
+            android:gravity="center"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/status"
+            android:text="3 in a row! you got a hint!"
+            android:textSize="20dip"
+            android:layout_marginTop="0dip"
+             />
+         
+         	<RelativeLayout
+			    android:id="@+id/actionss"
+			    android:layout_width="63dp"
+			    android:layout_height="41dp"
+			    android:layout_above="@+id/status"
+			    android:layout_alignParentRight="true"
+			    android:gravity="right"
+			    android:background="@drawable/complete"
+			    android:layout_marginTop="60dip"
+			    />
+        
+    </RelativeLayout>
     
 </RelativeLayout>

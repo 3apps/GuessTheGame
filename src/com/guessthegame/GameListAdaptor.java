@@ -80,6 +80,10 @@ class GameListAdaptor extends ArrayAdapter<Games> {
 				// TODO Auto-generated method stub
 				
 				GamesList.currentPage = GamesList.myPager.getCurrentItem();
+
+				GamesList.editor.putInt(GamesList.file+"_page", GamesList.currentPage);
+
+				GamesList.editor.commit();
 				
 				Intent intent = new Intent(context, Game.class);
 	   			

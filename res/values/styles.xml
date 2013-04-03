@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!--
         Base application theme, dependent on API level. This theme is replaced
@@ -17,6 +17,26 @@
     <style name="AppTheme" parent="AppBaseTheme">
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
-
+	
+    <style name="ShowcaseView">
+        <item name="titleTextColor">#e2ef65</item>
+        <item name="detailTextColor">#FFFFFF</item>
+        <item name="backgroundColor">#90000000</item>
+    </style>
+    
+    <style name="ShowcaseTitleText">
+        <item name="android:paddingTop">20dp</item>
+        
+    </style>
+    
+    <style name="ShowcaseButton">
+        <item name="android:paddingTop">20dip</item>
+        <item name="android:paddingBottom">20dip</item>
+        <item name="android:paddingLeft">40dip</item>
+        <item name="android:paddingRight">40dip</item>
+        <item name="android:background">@drawable/button</item>
+        <item name="android:layout_height">10dip</item>
+       
+    </style>
 
 </resources>

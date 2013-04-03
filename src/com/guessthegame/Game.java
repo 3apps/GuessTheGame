@@ -1,8 +1,11 @@
 package com.guessthegame;
 
+import android.R.color;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -32,7 +35,13 @@ import android.widget.Toast;
 import android.widget.ViewSwitcher.ViewFactory;
 import android.support.v4.app.NavUtils;
 
-public class Game extends Activity implements ViewFactory {
+import com.github.espiandev.showcaseview.ShowcaseView;
+import com.github.espiandev.showcaseview.ShowcaseView.ConfigOptions;
+import com.github.espiandev.showcaseview.ShowcaseView.OnShowcaseEventListener;
+import com.nineoldandroids.animation.*;
+
+@TargetApi(Build.VERSION_CODES.HONEYCOMB)
+public class Game extends Activity {
 
 	static ImageView gImg;
 	static RelativeLayout actions;
@@ -42,7 +51,12 @@ public class Game extends Activity implements ViewFactory {
 	static int correct;
 	long startTime;
 	boolean hintGiven = false;
-
+	RelativeLayout statusCover;
+	TextView status;
+	TextView statusExtra;
+	RelativeLayout statusTick;
+	Handler handler;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -52,7 +66,12 @@ public class Game extends Activity implements ViewFactory {
 		startTime = System.currentTimeMillis();
 
 		final SharedPreferences.Editor editor = MainActivity.prefs.edit();
-
+		
+		statusCover = (RelativeLayout) findViewById(R.id.statusCover);
+		status  = (TextView) findViewById(R.id.status);
+		statusExtra = (TextView) findViewById(R.id.status_extra);
+		statusTick = (RelativeLayout) findViewById(R.id.actionss);
+		
 		updateHints(false);
 
 		Bundle extras = getIntent().getExtras();
@@ -97,9 +116,11 @@ public class Game extends Activity implements ViewFactory {
 			});
 
 			gAnswer = (EditText) findViewById(R.id.answer);
-
+			
+			String[] ansArr = answer.split(",");
+			
 			if (correct == 1)
-				gAnswer.setText(answer);
+				gAnswer.setText((ansArr.length > 0 ? ansArr[0] : answer));
 
 			gAnswer.setOnKeyListener(new OnKeyListener() {
 				public boolean onKey(View v, int keyCode, KeyEvent event) {
@@ -150,6 +171,18 @@ public class Game extends Activity implements ViewFactory {
 			});
 
 			Button hintBtn = (Button) findViewById(R.id.hintBtn);
+			
+			Boolean firstTime = MainActivity.prefs.getBoolean("firstTime", true);
+			
+			if(firstTime == true) {
+				ShowcaseView.ConfigOptions co = new ShowcaseView.ConfigOptions();
+				co.hideOnClickOutside = true;
+				ShowcaseView sv = ShowcaseView.insertShowcaseView(R.id.hintBtn, this, "Stuck? Use a hint.", "If you get stuck click here to use a hint. You will get a new hint for every 3 correct guesses in a row.", co);
+			
+				editor.putBoolean("firstTime",false);
+
+				editor.commit();
+			}
 			
 			hintBtn.setOnClickListener(new OnClickListener() {
 
@@ -221,7 +254,7 @@ public class Game extends Activity implements ViewFactory {
 	}
 
 	public void checkAnswer(String text) {
-
+				
 		SharedPreferences.Editor editor = MainActivity.prefs.edit();
 
 		String[] answerArr = answer.split(",");
@@ -243,13 +276,8 @@ public class Game extends Activity implements ViewFactory {
 
 					correctAnswer = true;
 
-					if (fuzzy > 0) {
-						Toast.makeText(Game.this,
-								"Ok we will let you have that one!",
-								Toast.LENGTH_LONG).show();
-
-					}
-
+					status.setText("Correct!");
+					
 					gAnswer.setText(answer);
 
 					break;
@@ -258,7 +286,9 @@ public class Game extends Activity implements ViewFactory {
 			}
 
 			if (correctAnswer == true) {
-
+				
+				gHint.setVisibility(View.INVISIBLE);
+				
 				long difference = System.currentTimeMillis() - startTime;
 
 				int correctCnt = MainActivity.prefs.getInt(file
@@ -275,7 +305,10 @@ public class Game extends Activity implements ViewFactory {
 				int currentCorrect = (correctCnt + 1);
 
 				int inaRowCnt = (inaRow + 1);
-
+				
+				statusExtra.setText(inaRowCnt + " in a row!");
+				statusExtra.setTextColor(Color.parseColor("#e2ef65"));
+				
 				Long newtotalTime = (totalTime + difference);
 				Long newtotalTimeF = (totalTimeF + difference);
 
@@ -287,16 +320,12 @@ public class Game extends Activity implements ViewFactory {
 
 				editor.commit();
 
-				actions.setVisibility(View.VISIBLE);
-
 				int timeout = 1000;
 
 				if (inaRowCnt % 3 == 0) {
-
-					Toast.makeText(Game.this,
-							inaRowCnt + " in a row! Free Hint!",
-							Toast.LENGTH_LONG).show();
-
+					
+					statusExtra.setText(inaRowCnt + " in a row! you got a hint!");
+					
 					int hintCnts = (hintCnt + 1);
 
 					editor.putInt("hintCnt", hintCnts);
@@ -308,8 +337,8 @@ public class Game extends Activity implements ViewFactory {
 					updateHints(true);
 
 				}
-
-				Handler handler = new Handler();
+				
+				handler = new Handler();
 				handler.postDelayed(new Runnable() {
 					public void run() {
 
@@ -319,12 +348,24 @@ public class Game extends Activity implements ViewFactory {
 
 			} else if (lowestFuzzy < 4) {
 
-				Toast.makeText(Game.this, "Soo close, try again!",
-						Toast.LENGTH_LONG).show();
+				status.setText("Nearly!");
+				statusExtra.setText("Have another go!");
+				statusExtra.setTextColor(Color.GRAY);
 
+				handler = new Handler();
+				handler.postDelayed(new Runnable() {
+					public void run() {
+
+						statusCover.setVisibility(View.INVISIBLE);
+					}
+				}, 2000);
+				
 			} else {
-				Toast.makeText(Game.this, "Wrong, try again!",
-						Toast.LENGTH_LONG).show();
+
+				status.setText("Wrong!");
+				statusExtra.setText("Oops, Try again!");
+				statusExtra.setTextColor(Color.RED);
+				
 				gAnswer.setText("");
 
 				Animation shake = AnimationUtils.loadAnimation(this,
@@ -334,9 +375,23 @@ public class Game extends Activity implements ViewFactory {
 				editor.putInt("inaRow", 0);
 
 				editor.commit();
+				
+				if (handler != null) {
+					handler.getLooper().quit();
+				}
+				
+				handler = new Handler();
+				handler.postDelayed(new Runnable() {
+					public void run() {
+
+						statusCover.setVisibility(View.INVISIBLE);
+					}
+				}, 2000);
 
 			}
 		}
+		
+		statusCover.setVisibility(View.VISIBLE);
 
 	}
 
@@ -362,12 +417,6 @@ public class Game extends Activity implements ViewFactory {
 			hintText.startAnimation(fadeIn);
 		}
 
-	}
-
-	@Override
-	public View makeView() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }
