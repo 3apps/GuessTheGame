@@ -100,7 +100,7 @@
 	    
 	</RelativeLayout>
 	
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/answerbox"
@@ -116,10 +116,22 @@
 	        android:gravity="right"
 	        android:layout_marginBottom="5dip"
 	        android:layout_marginLeft="5dip"
-	        
+	        android:layout_alignParentLeft="true"
 	         />
         
-    </LinearLayout>
+        <Button
+	        android:id="@+id/facebookBtn"
+	        android:layout_width="40dip"
+	        android:layout_height="40dip"
+	        android:background="@drawable/facebook"	        
+	        android:layout_gravity="right"
+	        android:gravity="right"
+	        android:layout_marginBottom="5dip"
+	        android:layout_marginRight="5dip"
+	        android:layout_alignParentRight="true"
+	         />
+        
+    </RelativeLayout>
     
     <LinearLayout
         android:id="@+id/answerbox"

@@ -35,10 +35,14 @@ import android.widget.Toast;
 import android.widget.ViewSwitcher.ViewFactory;
 import android.support.v4.app.NavUtils;
 
+import com.facebook.Request;
+import com.facebook.Response;
+import com.facebook.Session;
+import com.facebook.SessionState;
+import com.facebook.model.GraphUser;
 import com.github.espiandev.showcaseview.ShowcaseView;
 import com.github.espiandev.showcaseview.ShowcaseView.ConfigOptions;
 import com.github.espiandev.showcaseview.ShowcaseView.OnShowcaseEventListener;
-import com.nineoldandroids.animation.*;
 
 @TargetApi(Build.VERSION_CODES.HONEYCOMB)
 public class Game extends Activity {
@@ -142,7 +146,23 @@ public class Game extends Activity {
 			gHint.setText(hint);
 
 			new loadImage(this, gImg, "images/" + img).execute();
+			
+			Button facebookBtn = (Button) findViewById(R.id.facebookBtn);
+			
+			facebookBtn.setOnClickListener(new OnClickListener() {
 
+				@Override
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+					// start Facebook Login
+					Intent intent = new Intent(getBaseContext(), FacebookPost.class);
+					intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+					intent.putExtra("IMG", img);
+	   				getBaseContext().startActivity(intent);
+				}
+
+			});
+			
 			Button checkBtn = (Button) findViewById(R.id.check);
 
 			checkBtn.setOnClickListener(new OnClickListener() {
@@ -389,9 +409,9 @@ public class Game extends Activity {
 				}, 2000);
 
 			}
+			
+			statusCover.setVisibility(View.VISIBLE);
 		}
-		
-		statusCover.setVisibility(View.VISIBLE);
 
 	}
 

@@ -15,6 +15,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.facebook.*;
+import com.facebook.model.*;
+
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.accounts.Account;
@@ -285,5 +288,6 @@ public class MainActivity extends Activity {
 
 	    return output;
 	}
+	
 	
 }
