@@ -1,5 +1,12 @@
 package com.guessthegame;
 
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.R.color;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -34,12 +41,8 @@ import android.widget.TextView.OnEditorActionListener;
 import android.widget.Toast;
 import android.widget.ViewSwitcher.ViewFactory;
 import android.support.v4.app.NavUtils;
-
-import com.facebook.Request;
-import com.facebook.Response;
-import com.facebook.Session;
-import com.facebook.SessionState;
-import com.facebook.model.GraphUser;
+import com.facebook.*;
+import com.facebook.model.*;
 import com.github.espiandev.showcaseview.ShowcaseView;
 import com.github.espiandev.showcaseview.ShowcaseView.ConfigOptions;
 import com.github.espiandev.showcaseview.ShowcaseView.OnShowcaseEventListener;
@@ -60,6 +63,9 @@ public class Game extends Activity {
 	TextView statusExtra;
 	RelativeLayout statusTick;
 	Handler handler;
+	private static final List<String> PERMISSIONS = Arrays.asList("publish_actions");
+	private static final String PENDING_PUBLISH_KEY = "pendingPublishReauthorization";
+	private boolean pendingPublishReauthorization = false;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -147,7 +153,7 @@ public class Game extends Activity {
 
 			new loadImage(this, gImg, "images/" + img).execute();
 			
-			Button facebookBtn = (Button) findViewById(R.id.facebookBtn);
+			final Button facebookBtn = (Button) findViewById(R.id.facebookBtn);
 			
 			facebookBtn.setOnClickListener(new OnClickListener() {
 
@@ -155,10 +161,45 @@ public class Game extends Activity {
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
 					// start Facebook Login
-					Intent intent = new Intent(getBaseContext(), FacebookPost.class);
-					intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-					intent.putExtra("IMG", img);
-	   				getBaseContext().startActivity(intent);
+					
+					facebookBtn.setVisibility(View.INVISIBLE);
+					
+					Session.openActiveSession(Game.this, true, new Session.StatusCallback() {
+
+						// callback when session changes state
+						@Override
+						public void call(Session session, SessionState state, Exception exception) {
+							
+							Log.d("SESSION","" + session);
+							
+							if (session.isOpened()) publishStory();
+							
+							/*
+							if (session.isOpened()) {
+
+								// make request to the /me API
+								Request.executeMeRequestAsync(session, new Request.GraphUserCallback() {
+
+									// callback after Graph API response with user object
+									@Override
+									public void onCompleted(GraphUser user, Response response) {
+
+										if (user != null) {
+											//TextView welcome = (TextView) findViewById(R.id.welcome);
+											//welcome.setText("Hello " + user.getName() + "!");
+											
+											Log.d("USER","" + user);
+											
+											//
+											
+										}
+									}
+								});
+							}
+							*/
+						}
+					});
+					
 				}
 
 			});
@@ -437,6 +478,81 @@ public class Game extends Activity {
 			hintText.startAnimation(fadeIn);
 		}
 
+	}
+	
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		Session.getActiveSession().onActivityResult(this, requestCode, resultCode, data);
+	
+	}
+	
+	private void publishStory() {
+		Session session = Session.getActiveSession();
+		
+		Log.d("session","" + session);
+		
+		if (session != null){
+
+			// Check for publish permissions    
+			List<String> permissions = session.getPermissions();
+			if (!isSubsetOf(PERMISSIONS, permissions)) {
+				pendingPublishReauthorization = true;
+				Session.NewPermissionsRequest newPermissionsRequest = new Session
+						.NewPermissionsRequest(this, PERMISSIONS);
+				session.requestNewPublishPermissions(newPermissionsRequest);
+				return;
+			}
+
+			Bundle postParams = new Bundle();
+			postParams.putString("name", "Guess The Game");
+			postParams.putString("caption", "The best game guessing game on Android!");
+			postParams.putString("description", "Help me guess this game!");
+			//postParams.putString("link", "http://www.blucreation.co.uk");
+			postParams.putString("picture", "http://blucreation.co.uk/GTG/" + img);
+
+			Request.Callback callback= new Request.Callback() {
+				public void onCompleted(Response response) {
+					JSONObject graphResponse = response
+							.getGraphObject()
+							.getInnerJSONObject();
+					String postId = null;
+					try {
+						postId = graphResponse.getString("id");
+					} catch (JSONException e) {
+						Log.i("DEBUG",
+								"JSON error "+ e.getMessage());
+					}
+					FacebookRequestError error = response.getError();
+					if (error != null) {
+						Toast.makeText(getBaseContext(),
+								error.getErrorMessage(),
+								Toast.LENGTH_SHORT).show();
+					} else {
+						Toast.makeText(getBaseContext(), 
+								"Posted to Facebook",
+								Toast.LENGTH_LONG).show();
+					}
+				}
+			};
+
+			Request request = new Request(session, "me/feed", postParams, 
+					HttpMethod.POST, callback);
+
+			RequestAsyncTask task = new RequestAsyncTask(request);
+			task.execute();
+			
+		}
+
+	}
+
+	private boolean isSubsetOf(Collection<String> subset, Collection<String> superset) {
+		for (String string : subset) {
+			if (!superset.contains(string)) {
+				return false;
+			}
+		}
+		return true;
 	}
 
 }
