@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="dexedLibs">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/bin/dexedLibs/facebooksdk-5620696a8cb7631ea98f66f0eeff5556.jar!/" />
+      <root url="jar://$PROJECT_DIR$/bin/dexedLibs/showcaseview-cec927a0cf696430d929ee2681f1de43.jar!/" />
+      <root url="jar://$PROJECT_DIR$/bin/dexedLibs/nineoldandroids-2.4.0-11f98448ac4fbbc30c25c2feff19d1bc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/bin/dexedLibs/annotations-3946453e77e5d39662cc2213740d1420.jar!/" />
+      <root url="jar://$PROJECT_DIR$/bin/dexedLibs/viewpagerindicator-57552f385a6e08eb968db0167aa58636.jar!/" />
+      <root url="jar://$PROJECT_DIR$/bin/dexedLibs/android-support-v4-2fee4994d6ebe374af7434cc2b6510e1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
