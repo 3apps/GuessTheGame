@@ -22,7 +22,7 @@
             >
             
             <ImageView
-				android:id="@+id/logo"
+				android:id="@+id/logo_header"
 				android:layout_width="160dp"
 		        android:layout_height="70dp"
 				android:src="@drawable/logo" 
