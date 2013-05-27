@@ -69,7 +69,7 @@ class GameListAdaptor extends ArrayAdapter<Games> {
 	        	holder.cc.setVisibility(View.INVISIBLE);
 	        }
 	        
-	        new loadImage(context, holder.ii, "images/" + o.img).execute();
+	        new loadImage(context, holder.ii, "images/" + o.img, true).execute();
 	        
         }
         

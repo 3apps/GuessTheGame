@@ -90,7 +90,7 @@ class LevelListAdaptor extends ArrayAdapter<Levels> {
         //If level has an image
         if(o.img != null && o.img != "" && o.img.length() > 0) {
 	        try {
-				ii.setImageBitmap(MainActivity.getBitmap(context, "images/" + o.img));
+				ii.setImageBitmap(MainActivity.getCroppedBitmap(MainActivity.getBitmap(context, "images/" + o.img)));
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

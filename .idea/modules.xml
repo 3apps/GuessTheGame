@@ -5,6 +5,9 @@
       <module fileurl="file://$PROJECT_DIR$/GuessTheGame.iml" filepath="$PROJECT_DIR$/GuessTheGame.iml" />
       <module fileurl="file:///Applications/facebook-android-sdk-3.0.1/facebook/facebook.iml" filepath="/Applications/facebook-android-sdk-3.0.1/facebook/facebook.iml" />
       <module fileurl="file://$USER_HOME$/Documents/workspace/JakeWharton-Android-ViewPagerIndicator-8cd549f/library/library.iml" filepath="$USER_HOME$/Documents/workspace/JakeWharton-Android-ViewPagerIndicator-8cd549f/library/library.iml" />
+      <module fileurl="file://$USER_HOME$/Documents/workspace/JakeWharton-Android-ViewPagerIndicator-8cd549f/library/library1.iml" filepath="$USER_HOME$/Documents/workspace/JakeWharton-Android-ViewPagerIndicator-8cd549f/library/library1.iml" />
+      <module fileurl="file://$USER_HOME$/Documents/workspace/library/library3.iml" filepath="$USER_HOME$/Documents/workspace/library/library3.iml" />
+      <module fileurl="file://$USER_HOME$/Documents/workspace/JakeWharton-Android-ViewPagerIndicator-8cd549f/sample/sample.iml" filepath="$USER_HOME$/Documents/workspace/JakeWharton-Android-ViewPagerIndicator-8cd549f/sample/sample.iml" />
     </modules>
   </component>
 </project>

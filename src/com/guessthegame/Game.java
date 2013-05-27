@@ -1,5 +1,6 @@
 package com.guessthegame;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
@@ -12,11 +13,14 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Parcelable;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
+import android.content.pm.ResolveInfo;
 import android.graphics.Color;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -72,7 +76,11 @@ public class Game extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_game);
 		// Show the Up button in the action bar.
-
+		
+		if (MainActivity.landscape) {
+			setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+		}
+		
 		startTime = System.currentTimeMillis();
 
 		final SharedPreferences.Editor editor = MainActivity.prefs.edit();
@@ -105,9 +113,17 @@ public class Game extends Activity {
 
 			if (correct == 1) {
 
-				actions.setVisibility(View.VISIBLE);
+				//actions.setVisibility(View.VISIBLE);
+				
+				status.setText("Correct!");
+				statusExtra.setText("");
+				
+				statusCover.setVisibility(View.VISIBLE);
+				
 			} else {
 				actions.setVisibility(View.INVISIBLE);
+				statusCover.setVisibility(View.INVISIBLE);
+				
 			}
 
 			gImg.setOnClickListener(new OnClickListener() {
@@ -120,6 +136,8 @@ public class Game extends Activity {
 					inputManager.hideSoftInputFromWindow(Game.this
 							.getCurrentFocus().getWindowToken(),
 							InputMethodManager.HIDE_NOT_ALWAYS);
+					
+					
 
 				}
 
@@ -151,7 +169,7 @@ public class Game extends Activity {
 
 			gHint.setText(hint);
 
-			new loadImage(this, gImg, "images/" + img).execute();
+			new loadImage(this, gImg, "images/" + img, false).execute();
 			
 			final Button facebookBtn = (Button) findViewById(R.id.facebookBtn);
 			
@@ -553,6 +571,20 @@ public class Game extends Activity {
 			}
 		}
 		return true;
+	}
+	
+	private void share() {
+		
+		Intent intent=new Intent(android.content.Intent.ACTION_SEND);
+		intent.setType("text/plain");
+		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+
+		// Add data to the intent, the receiving app will decide what to do with it.
+		intent.putExtra(Intent.EXTRA_SUBJECT, "Some Subject Line");
+		intent.putExtra(Intent.EXTRA_TEXT, "Body of the message, woot!");
+
+		startActivity(Intent.createChooser(intent, "How do you want to share?"));
+
 	}
 
 }

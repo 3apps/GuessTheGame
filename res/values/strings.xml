@@ -14,5 +14,15 @@
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
     <string name="app_id">174273356064735</string>
-
+    <bool name="landscape">false</bool>
+    <string name="gameGridSize">9</string>
+    <string name="gameGridCols">3</string>
+    <dimen name="gameGridHeight">90dip</dimen>
+    <dimen name="gameActionsLeft">40dip</dimen>
+    <dimen name="gameActionsHeight">31dip</dimen>
+    <dimen name="gameActionsWidth">53dip</dimen>
+    <dimen name="gameStatusFontSize">50dip</dimen>
+    <dimen name="gameStatusExtraFontSize">20dip</dimen>
+	<string name="levelsGridSize">1</string>
+    
 </resources>

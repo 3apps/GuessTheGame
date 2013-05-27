@@ -16,11 +16,13 @@ class loadImage extends AsyncTask<Object, Void, Bitmap> {
 	private ImageView imv;
 	private String name;
 	private Context context;
+	private boolean crop;
 
-	public loadImage(Context context, ImageView imv, String name) {
+	public loadImage(Context context, ImageView imv, String name, boolean crop) {
 		this.imv = imv;
 		this.name = name;
 		this.context = context;
+		this.crop = crop;
 	}
 
 	@Override
@@ -49,7 +51,11 @@ class loadImage extends AsyncTask<Object, Void, Bitmap> {
 	protected void onPostExecute(Bitmap result) {
 
 		if (result != null && imv != null) {
-			imv.setImageBitmap(result);
+			if(crop == true) {
+				imv.setImageBitmap(MainActivity.getCroppedBitmap(result));
+			} else {
+				imv.setImageBitmap(result);
+			}
 			imv.setVisibility(View.VISIBLE);
 		} else {
 			imv.setImageBitmap(null);

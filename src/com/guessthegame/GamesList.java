@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.app.Activity;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.support.v4.app.NavUtils;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -32,7 +33,8 @@ public class GamesList extends Activity {
 	static TextView Tdesc;
 	static TextView Tcount;
 	static ViewPager myPager;
-	int perPage = 9;
+	int perPage;
+
 	int gamesCnt = 0;
 	int pagesNo = 1;
 	static int currentPage = 0;
@@ -95,6 +97,12 @@ public class GamesList extends Activity {
 	public void onResume() { 
 		// After a pause OR at startup
 		super.onResume();
+		
+		if (MainActivity.landscape) {
+			setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+		}
+		
+		perPage = Integer.parseInt(getResources().getString(R.string.gameGridSize));
 		
 		editor = MainActivity.prefs.edit();
 		

@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/row"
-	android:layout_height="50dp"
+	android:layout_height="100dp"
 	android:layout_width="fill_parent"
 	android:orientation="horizontal"
 	android:gravity="center_vertical"
-	android:paddingLeft="12dp"
-	android:paddingRight="12dp"
+	
 	>
 	
     <FrameLayout 
@@ -29,8 +28,8 @@
 		
 	    <ImageView
 			android:id="@+id/img"
-			android:layout_width="50dp"
-	        android:layout_height="50dp"
+			android:layout_width="100dp"
+	        android:layout_height="100dp"
 			android:src="@drawable/ic_game"
 			/>
 	    		
@@ -38,11 +37,12 @@
 	    	android:layout_width="wrap_content"
 	    	android:layout_height="wrap_content"
 	    	android:textColor="#6E6E6E"
-	    	android:textSize="20dp"
+	    	android:textSize="24dp"
 	    	android:textStyle="bold"
 	    	android:gravity="center_vertical|center_horizontal"
 	    	android:layout_toLeftOf="@+id/ic_game"
-	    	android:layout_marginLeft="65dp"
+	    	android:layout_marginLeft="115dp"
+	    	android:layout_marginTop="20dip"
 	    	android:textAllCaps="true"
 	    	android:shadowColor="#FFFFFF"
 		    android:shadowDx="1"
@@ -52,30 +52,31 @@
 		<TextView android:id="@+id/desc" 
 	    	android:layout_width="wrap_content" 
 	     	android:layout_height="wrap_content" 
-	     	android:textSize="12dp"
+	     	android:textSize="16dp"
 	     	android:textColor="#6E6E6E"
 	     	android:gravity="center_vertical|center_horizontal"
 	     	android:layout_below="@+id/name"
-	     	android:layout_marginLeft="65dp"
-	     	android:layout_marginTop="-4dp"
+	     	android:layout_marginLeft="115dp"
+	     	android:layout_marginTop="5dp"
 	     	android:layout_marginBottom="4dp"/>
 		
 		<LinearLayout 
 		    android:id="@+id/progress_holder"
-		    android:layout_width="180dip"
-		    android:layout_height="6dip"
+		    android:layout_width="260dip"
+		    android:layout_height="8dip"
 		    android:layout_below="@+id/desc"
 		    android:orientation="horizontal"
 			android:background="@drawable/progress_bg"
 			android:weightSum="100"
 			android:padding="1dip"
-			android:layout_marginLeft="65dp"
+			android:layout_marginLeft="115dp"
 			android:visibility="invisible"
+			android:layout_marginTop="5dip"
 		    >
 		    
-		    <LinearLayout 
+		    <LinearLayout
 		    	android:id="@+id/progress_bar"
-			    android:layout_width="0dip"
+			    android:layout_width="match_parent"
 			    android:layout_weight="0"
 			    android:layout_height="wrap_content"
 				android:background="@drawable/progress_bar"
@@ -89,13 +90,13 @@
 		
     <RelativeLayout
 	    android:id="@+id/actions"
-	    android:layout_width="63dip"
-	    android:layout_height="41dip"
+	    android:layout_width="90dip"
+	    android:layout_height="61dip"
 	    android:layout_alignParentRight="true"
 	    android:layout_centerVertical="true"
 	    android:gravity="center_vertical|center_horizontal"
 	    android:background="@drawable/locked"
-	    android:layout_marginRight="8dp"
+	    android:layout_marginRight="0dp"
 	    android:layout_marginTop="5dp"
 	   	/>
 	

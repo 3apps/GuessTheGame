@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	android:layout_width="90dip"
-	android:layout_height="90dip"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
 	android:gravity="center_horizontal|center_vertical"
 	android:paddingBottom="10dp"
 	android:paddingTop="10dp" 
@@ -10,31 +10,29 @@
 	android:animateLayoutChanges="true"
 	>
   	
-    <RelativeLayout
-        android:layout_width="90dip"
-	    android:layout_height="90dip"
-        android:background="@drawable/borders"
-        android:padding="5dp"
+    <FrameLayout 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:foreground="@drawable/highlight"
         >
-        
 		<ImageView
 			android:id="@+id/game"
-			android:layout_width="90dip"
-	        android:layout_height="90dip"
+			android:layout_width="@dimen/gameGridHeight"
+			android:layout_height="@dimen/gameGridHeight"
 			android:src="@drawable/ic_game" 
-			android:padding="1dp"
+			android:layout_gravity="center"
+			android:focusable="true"
 			/>
-		
-	</RelativeLayout>
+		</FrameLayout>
 	
     <RelativeLayout
 	    android:id="@+id/actions"
-	    android:layout_width="53dp"
-	    android:layout_height="31dp"
+	    android:layout_width="@dimen/gameActionsWidth"
+	    android:layout_height="@dimen/gameActionsHeight"
 	    android:layout_centerVertical="true"
 	    android:gravity="right"
 	    android:background="@drawable/complete"
-	    android:layout_marginLeft="40dp"
+	    android:layout_marginLeft="@dimen/gameActionsLeft"
 	    android:visibility="invisible"
 	    android:animateLayoutChanges="true"
 	    >

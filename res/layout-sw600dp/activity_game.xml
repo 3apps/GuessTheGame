@@ -69,11 +69,14 @@
  
     <RelativeLayout
         android:id="@+id/gameholder"
-        android:layout_width="match_parent"
-	    android:layout_height="match_parent"
+        android:layout_width="500dip"
+	    android:layout_height="500dip"
 	    android:layout_gravity="center_horizontal"
 	    android:layout_centerHorizontal="true"
 	 	android:layout_below="@+id/header"
+	 	android:background="@drawable/borders"
+	 	android:layout_marginTop="60dip"
+	 	android:padding="10dip"
         >
     	
         <ImageView
@@ -97,13 +100,11 @@
 		    android:visibility="invisible"
 		    android:rotation="-90"
 		    />
-	    
-	</RelativeLayout>
 	
-    <RelativeLayout
+	   <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/answerbox"
+        android:layout_alignParentBottom="true"
         android:background="@drawable/shaddow_gradient"
          >
 	    
@@ -132,6 +133,9 @@
 	         />
         
     </RelativeLayout>
+	    
+	</RelativeLayout>
+	
     
     <LinearLayout
         android:id="@+id/answerbox"
@@ -236,8 +240,8 @@
          
          	<RelativeLayout
 			    android:id="@+id/actionss"
-			    android:layout_width="63dp"
-			    android:layout_height="41dp"
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
 			    android:layout_above="@+id/status"
 			    android:layout_alignParentRight="true"
 			    android:gravity="right"

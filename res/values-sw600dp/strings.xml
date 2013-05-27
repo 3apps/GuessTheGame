@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	
+    <bool name="landscape">true</bool>
+    <string name="gameGridSize">15</string>
+    <string name="gameGridCols">5</string>
+    <dimen name="gameGridHeight">160dip</dimen>
+    <dimen name="gameActionsLeft">92dip</dimen>
+    <dimen name="gameActionsHeight">51dip</dimen>
+    <dimen name="gameActionsWidth">73dip</dimen>
+    <dimen name="gameStatusFontSize">100dip</dimen>
+    <dimen name="gameStatusExtraFontSize">40dip</dimen>
+    <string name="levelsGridSize">3</string>
+
+</resources>

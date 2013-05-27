@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="gameGridSize">12</string>
+    <dimen name="gameGridHeight">90dip</dimen>
+    <dimen name="gameActionsLeft">40dip</dimen>
+    <dimen name="gameActionsHeight">31dip</dimen>
+    <dimen name="gameActionsWidth">53dip</dimen>
+    <dimen name="gameStatusFontSize">50dip</dimen>
+    <dimen name="gameStatusExtraFontSize">20dip</dimen>
+	<string name="levelsGridSize">1</string>
+
+</resources>
