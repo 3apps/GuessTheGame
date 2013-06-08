@@ -35,8 +35,14 @@ class loadImage extends AsyncTask<Object, Void, Bitmap> {
 		InputStream is;
 		try {
 			is = asset.open(name);
-			bitmap = BitmapFactory.decodeStream(is);
 			
+			BitmapFactory.Options options = new BitmapFactory.Options();
+			//options.inJustDecodeBounds = true;
+			if(crop == true) {
+				options.inSampleSize = 6;
+			}
+			bitmap = BitmapFactory.decodeStream(is, null, options);
+
 			is.close();
 
 		} catch (IOException e) {

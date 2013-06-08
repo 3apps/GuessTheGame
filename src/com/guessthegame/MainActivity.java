@@ -70,9 +70,6 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.activity_main);
 		
 		landscape = getResources().getBoolean(R.bool.landscape);
-		
-		Toast.makeText(this, "" + getResources().getBoolean(R.bool.landscape),
-				Toast.LENGTH_LONG).show();
 
 		if (landscape) {
 			setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
@@ -232,7 +229,9 @@ public class MainActivity extends Activity {
 		for (final String filename : files) {
 
 			try {
-
+				
+				Log.i("FILE","" + filename);
+				
 				if (filename.contains(".json")) {
 
 					InputStream in = this.getAssets().open(filename);
